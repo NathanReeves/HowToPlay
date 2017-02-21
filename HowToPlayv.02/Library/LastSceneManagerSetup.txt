@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/OurAssets/Platformer.unity
+- path: Assets/OurAssets/topdownwhitebox.unity
   isLoaded: 1
   isActive: 1
