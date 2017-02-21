@@ -8,7 +8,7 @@ public class PlayerControl : MonoBehaviour {
 	Vector3 movement;
 	bool forward;
 	bool turn;
-	bool jumped;
+	public bool jumped;
 	// Use this for initialization
 	void Start () {
 		forward = true;
@@ -25,7 +25,7 @@ public class PlayerControl : MonoBehaviour {
 			if (!forward)
 				turn = true;
 			forward = true;
-			movement = new Vector3 (.22f, 0, 0);
+			movement = new Vector3 (.15f, 0, 0);
 			playerRigidbody.MovePosition (transform.position + movement);
 			GetComponent<Animator> ().SetBool ("IsWalking", true);
 
@@ -34,7 +34,7 @@ public class PlayerControl : MonoBehaviour {
 			if (forward)
 				turn = true;
 			forward = false;
-			movement = new Vector3 (-.22f, 0, 0);
+			movement = new Vector3 (-.15f, 0, 0);
 			playerRigidbody.MovePosition (transform.position + movement);
 			GetComponent<Animator> ().SetBool ("IsWalking", true);
 
@@ -43,7 +43,7 @@ public class PlayerControl : MonoBehaviour {
 			GetComponent<Animator>().SetBool ("IsWalking", false);
 		if (Input.GetKey (KeyCode.UpArrow)) {
 			if (!jumped) {
-				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x,playerRigidbody.velocity.y + 9, playerRigidbody.velocity.z);
+				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x,playerRigidbody.velocity.y + 7, playerRigidbody.velocity.z);
 				jumped = true;
 			}
 

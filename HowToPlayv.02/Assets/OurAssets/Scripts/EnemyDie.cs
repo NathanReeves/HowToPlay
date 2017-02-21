@@ -15,6 +15,9 @@ public class EnemyDie : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other)
 	{
+		//var playerRigidbody = other.attachedRigidbody
+		var playerRigidbody = other.GetComponent<Rigidbody> ();
+		playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 4, playerRigidbody.velocity.z);
 		Destroy (gameObject);
 	}
 }
