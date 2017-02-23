@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enter2D
+  - EnterTwinStickClub
+  - EnterTwinStickShoot
+  - Enter3rdPerson
+  - Enter1stPerson
+  - PlatCam
+  - TwinCam
+  - ThirdCam
+  - FirstCam
+  - Ground
   layers:
   - Default
   - TransparentFX
