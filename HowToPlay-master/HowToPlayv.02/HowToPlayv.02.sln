@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HowToPlayv.02", "HowToPlayv.02.csproj", "{6AD83E36-0F1B-34BC-5DC5-837B68C0E93E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HowToPlayv.02.Editor", "HowToPlayv.02.Editor.csproj", "{10BE7260-D6DC-68EE-C702-8F0E4B0E39ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AD83E36-0F1B-34BC-5DC5-837B68C0E93E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD83E36-0F1B-34BC-5DC5-837B68C0E93E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD83E36-0F1B-34BC-5DC5-837B68C0E93E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD83E36-0F1B-34BC-5DC5-837B68C0E93E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10BE7260-D6DC-68EE-C702-8F0E4B0E39ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10BE7260-D6DC-68EE-C702-8F0E4B0E39ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10BE7260-D6DC-68EE-C702-8F0E4B0E39ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10BE7260-D6DC-68EE-C702-8F0E4B0E39ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
