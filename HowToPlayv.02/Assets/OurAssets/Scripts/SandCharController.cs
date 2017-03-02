@@ -190,11 +190,19 @@ public class SandCharController : MonoBehaviour
             twinCam.enabled = true;
             thirdCam.enabled = false;
             firstCam.enabled = false;
+
+            // Show arm and sword
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
         }
         if (other.gameObject.CompareTag("EnterTwinStickShoot"))
         {
             // Switch to twin stick shooter controls (add shooting)
             moveZone = 4;
+
+            // Switch from melee to shooting
+            this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
         }
         if (other.gameObject.CompareTag("Enter3rdPerson"))
         {
