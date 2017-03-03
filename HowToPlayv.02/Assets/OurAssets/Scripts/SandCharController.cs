@@ -78,7 +78,7 @@ public class SandCharController : MonoBehaviour
         }
 
         // Check for jumping
-        if (isGrounded && moveZone > 1 && Input.GetKey("joystick button 0"))
+        if (isGrounded && moveZone > 1 && (Input.GetKey("joystick button 0") || Input.GetKey("space")))
         {
             Jump();
         }
@@ -100,10 +100,7 @@ public class SandCharController : MonoBehaviour
     }
 
     private void MoveTwinStickClub(float horiz, float vert)
-    {
-        // Show player arm and sword
-        //player.renderer.child        
-
+    {     
         // Set rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
@@ -119,9 +116,6 @@ public class SandCharController : MonoBehaviour
 
     private void MoveTwinStickShoot(float horiz, float vert)
     {
-        // Show gun instead of sword
-        // blah
-
         // Set rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
@@ -138,7 +132,7 @@ public class SandCharController : MonoBehaviour
     private void TurnTwinStickShoot()
     {
         // Create a ray
-        camRay = Camera.current.ScreenPointToRay(Input.mousePosition);
+        camRay = twinCam.ScreenPointToRay(Input.mousePosition);
 
         // Setup RaycastHit to get info from ray
         RaycastHit floorHit;
@@ -150,6 +144,7 @@ public class SandCharController : MonoBehaviour
             playerToMouse.y = 0; // Make sure player isn't leaning in y axis
 
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+            Debug.Log(newRotation);
             playerRigidBody.MoveRotation(newRotation);
         }
     }
