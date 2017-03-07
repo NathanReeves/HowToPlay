@@ -83,7 +83,7 @@ public class SandCharController : MonoBehaviour
         }
 
         // Check for jumping
-        if (isGrounded && moveZone > 1 && (Input.GetKey("joystick button 0") || Input.GetKey("space")))
+        if (isGrounded && moveZone > 1 &&(Input.GetKey("joystick button 0") || Input.GetKey("space")))
         {
             Jump();
         }
