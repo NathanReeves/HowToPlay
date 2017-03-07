@@ -1,8 +1,4 @@
-﻿/*  Code taken from/based on Survival Shooting Unity Tutorial
- *  scripts (with some small changes)
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
