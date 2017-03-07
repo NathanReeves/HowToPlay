@@ -21,6 +21,8 @@ public class SandCharController : MonoBehaviour
     private Rigidbody playerRigidBody;
     private int moveZone = 1;
     private bool isGrounded;
+	bool turn;
+	bool forward;
     Ray camRay;
     private float camRayLength = 100f;
     private int floorMask;
@@ -39,6 +41,9 @@ public class SandCharController : MonoBehaviour
         twinCam.enabled = false;
         thirdCam.enabled = false;
         firstCam.enabled = false;
+		turn = false;
+		forward = true;
+
     }
 
     void FixedUpdate()
@@ -82,6 +87,30 @@ public class SandCharController : MonoBehaviour
         {
             Jump();
         }
+
+		if (Input.GetAxis ("Horizontal") < 0) {
+			GetComponent<Animator> ().SetBool ("IsWalking", true);
+			if (forward)
+				turn = true;
+			forward = false;
+
+		} else if (Input.GetAxis ("Horizontal") > 0) {
+			GetComponent<Animator> ().SetBool ("IsWalking", true);
+			if (!forward)
+				turn = true;
+			forward = true;
+
+		} else {
+			GetComponent<Animator> ().SetBool ("IsWalking", false);
+		}
+		//Check for turning
+		if (turn) {
+			Vector3 rot = transform.rotation.eulerAngles;
+			rot = new Vector3(rot.x,rot.y+180,rot.z);
+			transform.rotation = Quaternion.Euler(rot);
+			//playerRigidbody.MoveRotation (transform.rota);
+			turn = false;
+		}
     }
 
     private void MovePlatformer(float horiz)
@@ -221,12 +250,17 @@ public class SandCharController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-            isGrounded = true;
+		if (collision.gameObject.CompareTag ("Ground")) {
+			isGrounded = true;
+			GetComponent<Animator> ().SetBool ("Grounded", true);
+			GetComponent<Animator> ().SetBool ("Jump", false);
+		}
     }
 
     private void Jump()
     {
+		GetComponent<Animator> ().SetBool ("Jump", true);
+		GetComponent<Animator> ().SetBool ("Grounded", false);
         isGrounded = false;
         playerRigidBody.AddForce(Vector3.up * jumpSpeed);
     }
