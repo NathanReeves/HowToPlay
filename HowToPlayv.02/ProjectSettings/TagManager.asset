@@ -14,6 +14,7 @@ TagManager:
   - ThirdCam
   - FirstCam
   - Ground
+  - Spike
   layers:
   - Default
   - TransparentFX
