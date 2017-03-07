@@ -82,7 +82,9 @@
     <Compile Include="Assets\OurAssets\Scripts\EnemyKill.cs" />
     <Compile Include="Assets\OurAssets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharController.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\SandCharHealth.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharShooting.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\SandEnemyAttack.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandFixedCamController.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandFollowCamController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
