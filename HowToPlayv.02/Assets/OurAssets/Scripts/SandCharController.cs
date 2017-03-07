@@ -173,7 +173,6 @@ public class SandCharController : MonoBehaviour
             playerToMouse.y = 0; // Make sure player isn't leaning in y axis
 
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-            Debug.Log(newRotation);
             playerRigidBody.MoveRotation(newRotation);
         }
     }
