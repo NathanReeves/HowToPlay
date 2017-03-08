@@ -43,7 +43,7 @@ public class SandCharController : MonoBehaviour
         firstCam.enabled = false;
 		turn = false;
 		forward = true;
-
+        moveZone = 2;
     }
 
     void FixedUpdate()
@@ -249,11 +249,23 @@ public class SandCharController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-		if (collision.gameObject.CompareTag ("Ground")) {
-			isGrounded = true;
-			GetComponent<Animator> ().SetBool ("Grounded", true);
-			GetComponent<Animator> ().SetBool ("Jump", false);
-		}
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            if (!isGrounded)
+                isGrounded = true;
+            GetComponent<Animator>().SetBool("Grounded", true);
+            GetComponent<Animator>().SetBool("Jump", false);
+        }
+        
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            
+            isGrounded = false;
+            GetComponent<Animator>().SetBool("Grounded", false);
+        }
     }
 
     private void Jump()
