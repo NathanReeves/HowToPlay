@@ -251,7 +251,7 @@ public class SandCharController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (!isGrounded)
+            if (!isGrounded && playerRigidBody.velocity.y == 0)
                 isGrounded = true;
             GetComponent<Animator>().SetBool("Grounded", true);
             GetComponent<Animator>().SetBool("Jump", false);
