@@ -154,6 +154,7 @@ public class SandCharController : MonoBehaviour
     {
         // Set rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
         // Set movement according to input
         movement.Set(-vert, 0f, horiz);
 
@@ -213,22 +214,23 @@ public class SandCharController : MonoBehaviour
         {
             // Switch to twin stick controls (only weapon swinging)
             moveZone = 3;
+
+            // Show arm and sword
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+
             // Switch to twin stick camera
             platCam.enabled = false;
             twinCam.enabled = true;
             thirdCam.enabled = false;
             firstCam.enabled = false;
-
-            // Show arm and sword
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
         }
         if (other.gameObject.CompareTag("EnterTwinStickShoot"))
         {
             // Switch to twin stick shooter controls (add shooting)
             moveZone = 4;
 
-            // Switch from melee to shooting
+            // Switch from showing melee to showing gun instead
             this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
             this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
         }
@@ -236,6 +238,7 @@ public class SandCharController : MonoBehaviour
         {
             // Switch to 3rd person / 1st person controls
             moveZone = 5;
+
             // Switch to 3rd person camera
             platCam.enabled = false;
             twinCam.enabled = false;
@@ -261,7 +264,6 @@ public class SandCharController : MonoBehaviour
             GetComponent<Animator>().SetBool("Grounded", true);
             GetComponent<Animator>().SetBool("Jump", false);
         }
-        
     }
     private void OnCollisionExit(Collision collision)
     {
