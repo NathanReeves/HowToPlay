@@ -17,6 +17,7 @@ public class SandCharMelee : MonoBehaviour
     Ray attack;
     RaycastHit attackHit;
     int hitableMask;
+    LineRenderer attackLine;
     //ParticleSystem meleeParticles;
     //AudioSource meleeAudio;
     //float effectsDisplayTime = 0.2f;
@@ -30,6 +31,7 @@ public class SandCharMelee : MonoBehaviour
         // Setup references
         //meleeParticles = GetComponent<ParticleSystem>();
         //meleeAudio = GetComponent<AudioSource>();
+        attackLine = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -66,9 +68,13 @@ public class SandCharMelee : MonoBehaviour
         //gunParticles.Stop();
         //gunParticles.Play();
 
+        // Set first point of visible attack line
+        attackLine.enabled = true;
+        attackLine.SetPosition(0, transform.position);
+
         // Set first point & direction of attack ray 
         attack.origin = transform.position;
-        attack.direction = transform.forward;
+        attack.direction = transform.right;
 
         // Raycast against hitable objects; if it hits anything...
         if (Physics.Raycast(attack, out attackHit, attackRange, hitableMask))
@@ -81,6 +87,15 @@ public class SandCharMelee : MonoBehaviour
             {
                 enemyHealth.TakeDamage(dps, attackHit.point);
             }
+
+            // Set end of line renderer at hit object
+            attackLine.SetPosition(1, attackHit.point);
+        }
+        // Otherwise, if didn't hit anything...
+        else
+        {
+            // ... extend attack line out to range limit
+            attackLine.SetPosition(1, attack.origin + attack.direction * attackRange);
         }
     }
 }
