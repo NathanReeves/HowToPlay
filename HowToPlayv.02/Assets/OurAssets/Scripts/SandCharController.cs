@@ -43,7 +43,7 @@ public class SandCharController : MonoBehaviour
         firstCam.enabled = false;
 		turn = false;
 		forward = true;
-
+        moveZone = 2;
     }
 
     void FixedUpdate()
@@ -83,7 +83,7 @@ public class SandCharController : MonoBehaviour
         }
 
         // Check for jumping
-        if (isGrounded && moveZone > 1 && (Input.GetKey("joystick button 0") || Input.GetKey("space")))
+        if (isGrounded && moveZone > 1 &&(Input.GetKey("joystick button 0") || Input.GetKey("space")))
         {
             Jump();
         }
@@ -249,11 +249,23 @@ public class SandCharController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-		if (collision.gameObject.CompareTag ("Ground")) {
-			isGrounded = true;
-			GetComponent<Animator> ().SetBool ("Grounded", true);
-			GetComponent<Animator> ().SetBool ("Jump", false);
-		}
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            if (!isGrounded && playerRigidBody.velocity.y == 0)
+                isGrounded = true;
+            GetComponent<Animator>().SetBool("Grounded", true);
+            GetComponent<Animator>().SetBool("Jump", false);
+        }
+        
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            
+            isGrounded = false;
+            GetComponent<Animator>().SetBool("Grounded", false);
+        }
     }
 
     private void Jump()
