@@ -1,14 +1,4 @@
 sceneSetups:
-- path: Assets/OurAssets/PlayTest.unity
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-- path: Assets/OurAssets/PlayTest.unity
-=======
 - path: Assets/2D.unity
->>>>>>> origin/master
->>>>>>> origin/master
->>>>>>> origin/master
   isLoaded: 1
   isActive: 1
