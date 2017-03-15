@@ -67,9 +67,17 @@ public class SandCharController : MonoBehaviour
         else if (moveZone == 4)
         {
             float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVerical = Input.GetAxis("Vertical");
-
-            MoveTwinStickShoot(moveHorizontal, moveVerical);
+            float moveVertical = Input.GetAxis("Vertical");
+           
+            Vector3 forward = twinCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
+            forward.y = 0f;
+            forward = forward.normalized;
+            Vector3 right = new Vector3(forward.z, 0.0f, -forward.x);
+            Vector3 walkDirection = (moveHorizontal*right + moveVertical*forward);
+            Quaternion newRotation = Quaternion.LookRotation(walkDirection);
+            playerRigidBody.MoveRotation(newRotation);
+            //twinCam.GetComponent<Camera>().transform.forward.y  
+            MoveTwinStickShoot(moveHorizontal,  twinCam.GetComponent<Camera>().transform.forward.y);
             TurnTwinStickShoot();
         }
         // Use 3rd/1st person controls when in 3rd/1st person zone
@@ -108,7 +116,6 @@ public class SandCharController : MonoBehaviour
 			Vector3 rot = transform.rotation.eulerAngles;
 			rot = new Vector3(rot.x,rot.y+180,rot.z);
 			transform.rotation = Quaternion.Euler(rot);
-			//playerRigidbody.MoveRotation (transform.rota);
 			turn = false;
 		}
     }
@@ -147,7 +154,6 @@ public class SandCharController : MonoBehaviour
     {
         // Set rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
         // Set movement according to input
         movement.Set(-vert, 0f, horiz);
 
@@ -155,14 +161,13 @@ public class SandCharController : MonoBehaviour
         movement = movement.normalized * moveSpeed * Time.deltaTime;
 
         // Move player
-        playerRigidBody.MovePosition(transform.position + movement);
+        playerRigidBody.MovePosition(movement);
     }
 
     private void TurnTwinStickShoot()
     {
         // Create a ray
         camRay = twinCam.ScreenPointToRay(Input.mousePosition);
-
         // Setup RaycastHit to get info from ray
         RaycastHit floorHit;
 
