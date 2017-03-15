@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/OurAssets/PlayTest.unity
+=======
+- path: Assets/OurAssets/AllGenreSandbox.unity
+>>>>>>> origin/master
   isLoaded: 1
   isActive: 1

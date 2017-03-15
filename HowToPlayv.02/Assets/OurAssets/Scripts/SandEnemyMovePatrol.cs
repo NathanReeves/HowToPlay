@@ -30,9 +30,6 @@ public class SandEnemyMovePatrol : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(transform.position.z);
-        Debug.Log(patrolBoundMin);
-
         // If enemy still has health...
         if (enemyHealth.currentHealth > 0)
         {
