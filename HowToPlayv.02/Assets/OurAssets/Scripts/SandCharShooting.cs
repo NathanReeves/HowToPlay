@@ -80,21 +80,19 @@ public class SandCharShooting : MonoBehaviour
 
         // Set first point & direction of shotFired ray 
         shotFired.origin = transform.position;
-        shotFired.direction = transform.forward;
+        shotFired.direction = transform.right;
 
         // Raycast against shootable objects; if it hits anything...
         if (Physics.Raycast(shotFired, out shotHit, shotRange, shootableMask))
         {
             // See if hit object has EnemyHealth script
-            //EnemyHealth enemyHealth = shotHit.collider.GetComponent<EnemyHealth>();
+            EnemyHealth enemyHealth = shotHit.collider.GetComponent<EnemyHealth>();
 
-            /*
             // If hit object does have EnemyHelth, it takes damage
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(dps, shotHit.point);
             }
-            */
 
             // Set end of line renderer at hit object
             shotLine.SetPosition(1, shotHit.point);

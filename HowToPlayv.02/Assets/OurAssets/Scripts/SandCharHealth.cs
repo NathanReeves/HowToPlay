@@ -41,7 +41,9 @@ public class SandCharHealth : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-		// If the player has just been damaged...
+        Debug.Log("Player health: " + currentHealth);
+
+        // If the player has just been damaged...
         if (damaged)
         {
             // ... damage feedback
@@ -73,7 +75,7 @@ public class SandCharHealth : MonoBehaviour
         // If player's health is 0, and not already dead...
         if (currentHealth <= 0 && !isDead)
         {
-            // ... play is killed
+            // ... player is killed
             Dead();
         }
     }
