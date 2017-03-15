@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour {
 	public bool jumped;
 	// Use this for initialization
 	void Start () {
+        Physics.gravity = new Vector3(0, 10000000f, 0);
 		forward = true;
 		turn = false;
 		playerRigidbody = GetComponent <Rigidbody> ();
@@ -41,13 +42,31 @@ public class PlayerControl : MonoBehaviour {
 		} 
 		else
 			GetComponent<Animator>().SetBool ("IsWalking", false);
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			if (!jumped) {
-				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x,playerRigidbody.velocity.y + 7, playerRigidbody.velocity.z);
-				jumped = true;
-			}
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (!jumped)
+            {
+                playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + 7, playerRigidbody.velocity.z);
+                jumped = true;
+            }
 
-		}
+        }
+        else
+        {
+            if(playerRigidbody.velocity.y >-10 && playerRigidbody.velocity.y<=0)
+            {
+                playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, -10, playerRigidbody.velocity.z);
+            }
+            if (playerRigidbody.velocity.y > -100)
+            {
+
+
+                Debug.Log(playerRigidbody.velocity.y);
+                    playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y + -20, playerRigidbody.velocity.z);
+
+            }
+        }
+        
 		if (turn) {
 			Vector3 rot = transform.rotation.eulerAngles;
 			rot = new Vector3(rot.x,rot.y+180,rot.z);

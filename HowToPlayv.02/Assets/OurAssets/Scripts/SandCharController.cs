@@ -115,6 +115,7 @@ public class SandCharController : MonoBehaviour
 
     private void MovePlatformer(float horiz)
     {
+        Physics.gravity = new Vector3(0, -25f, 0);
         // Set movement/rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
 
