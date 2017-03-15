@@ -117,7 +117,7 @@ public class SandCharController : MonoBehaviour
         }
 
         // Check for jumping
-        if (isGrounded && moveZone > 1 &&(Input.GetKey("joystick button 0") || Input.GetKey("space")))
+        if (isGrounded && (int)playerRigidBody.velocity.y == 0 && moveZone > 1 &&(Input.GetKey("joystick button 0") || Input.GetKey("space")))
         {
             Jump();
         }
@@ -134,6 +134,7 @@ public class SandCharController : MonoBehaviour
 
     private void MovePlatformer(float horiz)
     {
+        Physics.gravity = new Vector3(0, -25f, 0);
         // Set movement/rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
 
@@ -283,9 +284,11 @@ public class SandCharController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (!isGrounded && playerRigidBody.velocity.y == 0)
+            isGrounded = true;
+            if (!isGrounded)
                 isGrounded = true;
             GetComponent<Animator>().SetBool("Grounded", true);
             GetComponent<Animator>().SetBool("Jump", false);
@@ -305,7 +308,7 @@ public class SandCharController : MonoBehaviour
     {
 		GetComponent<Animator> ().SetBool ("Jump", true);
 		GetComponent<Animator> ().SetBool ("Grounded", false);
-        isGrounded = false;
+        //isGrounded = false;
         playerRigidBody.AddForce(Vector3.up * jumpSpeed);
     }
 }
