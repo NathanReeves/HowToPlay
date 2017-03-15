@@ -6,7 +6,7 @@ public class SandCharShooting : MonoBehaviour
 {
     // Serialized fields
     [SerializeField]
-    int dps = 20;
+    int damageAmount = 20;
     [SerializeField]
     float shotCooldown = 0.3f;
     [SerializeField]
@@ -21,7 +21,7 @@ public class SandCharShooting : MonoBehaviour
     LineRenderer shotLine;
     //AudioSource gunAudio;
     //Light gunLight;
-    //float effectsDisplayTime = 0.2f;
+    float effectsDisplayTime = 0.2f;
 
     // Call when game first starts up
 	void Awake ()
@@ -49,15 +49,19 @@ public class SandCharShooting : MonoBehaviour
             Shoot();
         }
 
-        /*
-        // If timer has exceeded 
+        // If timer is exceeded...
         if (timer >= shotCooldown * effectsDisplayTime)
         {
             // ... disable effects
             DisableEffects();
         }
-        */
 	}
+
+    public void DisableEffects()
+    {
+        shotLine.enabled = false;
+        //gunLight.enabled = false;
+    }
 
     void Shoot()
     {
@@ -80,18 +84,21 @@ public class SandCharShooting : MonoBehaviour
 
         // Set first point & direction of shotFired ray 
         shotFired.origin = transform.position;
-        shotFired.direction = transform.right;
+        shotFired.direction = transform.forward;
 
         // Raycast against shootable objects; if it hits anything...
         if (Physics.Raycast(shotFired, out shotHit, shotRange, shootableMask))
         {
+            Debug.Log("Hit");
+
             // See if hit object has EnemyHealth script
-            EnemyHealth enemyHealth = shotHit.collider.GetComponent<EnemyHealth>();
+            SandEnemyHealth enemyHealth = shotHit.collider.GetComponent<SandEnemyHealth>();
 
             // If hit object does have EnemyHelth, it takes damage
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(dps, shotHit.point);
+                Debug.Log("Enemy hit");
+                enemyHealth.TakeDamage(damageAmount, shotHit.point);
             }
 
             // Set end of line renderer at hit object

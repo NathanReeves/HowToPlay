@@ -17,7 +17,7 @@ public class SandEnemyHealth : MonoBehaviour
     //private Animator anim;
     //private AudioSource enemyAudio;
     //private ParticleSystem hitParticles;
-    private CapsuleCollider capsuleCollider;
+    private BoxCollider boxCollider;
     private bool isDead;
     private bool isSinking;
 
@@ -27,7 +27,7 @@ public class SandEnemyHealth : MonoBehaviour
         //anim = GetComponent<Animator>();
         //enemyAudio = GetComponent<AudioSource>();
         //hitParticles = GetComponent<ParticleSystem>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        boxCollider = GetComponent<BoxCollider>();
 
         // Set current health as start health at beginning
         currentHealth = startingHealth;
@@ -80,7 +80,7 @@ public class SandEnemyHealth : MonoBehaviour
         isDead = true;
 
         // Turn collider into a trigger so shots can now pass through it
-        capsuleCollider.isTrigger = true;
+        boxCollider.isTrigger = true;
 
         // Tell animator that enemy is dead
         //anim.SetTrigger("Dead");

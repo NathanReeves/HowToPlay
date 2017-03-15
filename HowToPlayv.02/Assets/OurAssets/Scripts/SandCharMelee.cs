@@ -80,7 +80,7 @@ public class SandCharMelee : MonoBehaviour
         if (Physics.Raycast(attack, out attackHit, attackRange, hitableMask))
         {
             // See if hit object has EnemyHealth script
-            EnemyHealth enemyHealth = attackHit.collider.GetComponent<EnemyHealth>();
+            SandEnemyHealth enemyHealth = attackHit.collider.GetComponent<SandEnemyHealth>();
 
             // If hit object does have EnemyHelth, it takes damage
             if (enemyHealth != null)
