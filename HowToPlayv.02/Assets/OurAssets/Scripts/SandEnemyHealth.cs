@@ -14,9 +14,9 @@ public class SandEnemyHealth : MonoBehaviour
     [SerializeField]
     private AudioClip deathClip;
 
-    private Animator anim;
-    private AudioSource enemyAudio;
-    private ParticleSystem hitParticles;
+    //private Animator anim;
+    //private AudioSource enemyAudio;
+    //private ParticleSystem hitParticles;
     private CapsuleCollider capsuleCollider;
     private bool isDead;
     private bool isSinking;
@@ -24,9 +24,9 @@ public class SandEnemyHealth : MonoBehaviour
 	void Awake ()
     {
         // Setup references
-        anim = GetComponent<Animator>();
-        enemyAudio = GetComponent<AudioSource>();
-        hitParticles = GetComponent<ParticleSystem>();
+        //anim = GetComponent<Animator>();
+        //enemyAudio = GetComponent<AudioSource>();
+        //hitParticles = GetComponent<ParticleSystem>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         // Set current health as start health at beginning
@@ -35,6 +35,8 @@ public class SandEnemyHealth : MonoBehaviour
 	
 	void Update ()
     {
+        Debug.Log("Enemy health: " + currentHealth);
+
 		// If the enemy should be sinking...
         if (isSinking)
         {
@@ -53,16 +55,16 @@ public class SandEnemyHealth : MonoBehaviour
         }
 
         // Play hurt sound effect
-        enemyAudio.Play();
+        //enemyAudio.Play();
 
         // Reduce current health by damage amount
         currentHealth -= amount;
 
         // Set poistion of particle system to hitPoint
-        hitParticles.transform.position = hitPoint;
+        //hitParticles.transform.position = hitPoint;
 
         // Play the particles
-        hitParticles.Play();
+        //hitParticles.Play();
 
         // If current health is <= zero...
         if (currentHealth <= 0)
@@ -81,11 +83,11 @@ public class SandEnemyHealth : MonoBehaviour
         capsuleCollider.isTrigger = true;
 
         // Tell animator that enemy is dead
-        anim.SetTrigger("Dead");
+        //anim.SetTrigger("Dead");
 
         // Change audio to play enemy death, then play it
-        enemyAudio.clip = deathClip;
-        enemyAudio.Play();
+        //enemyAudio.clip = deathClip;
+        //enemyAudio.Play();
     }
 
     public void StartSinking()

@@ -80,7 +80,7 @@ public class SandCharShooting : MonoBehaviour
 
         // Set first point & direction of shotFired ray 
         shotFired.origin = transform.position;
-        shotFired.direction = transform.forward;
+        shotFired.direction = transform.right;
 
         // Raycast against shootable objects; if it hits anything...
         if (Physics.Raycast(shotFired, out shotHit, shotRange, shootableMask))

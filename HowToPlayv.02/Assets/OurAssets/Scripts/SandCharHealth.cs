@@ -41,7 +41,9 @@ public class SandCharHealth : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-		// If the player has just been damaged...
+        Debug.Log("Player health: " + currentHealth);
+
+        // If the player has just been damaged...
         if (damaged)
         {
             // ... damage feedback
