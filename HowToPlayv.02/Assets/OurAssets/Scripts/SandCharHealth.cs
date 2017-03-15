@@ -73,7 +73,7 @@ public class SandCharHealth : MonoBehaviour
         // If player's health is 0, and not already dead...
         if (currentHealth <= 0 && !isDead)
         {
-            // ... play is killed
+            // ... player is killed
             Dead();
         }
     }
