@@ -89,15 +89,12 @@ public class SandCharShooting : MonoBehaviour
         // Raycast against shootable objects; if it hits anything...
         if (Physics.Raycast(shotFired, out shotHit, shotRange, shootableMask))
         {
-            Debug.Log("Hit");
-
             // See if hit object has EnemyHealth script
             SandEnemyHealth enemyHealth = shotHit.collider.GetComponent<SandEnemyHealth>();
 
             // If hit object does have EnemyHelth, it takes damage
             if (enemyHealth != null)
             {
-                Debug.Log("Enemy hit");
                 enemyHealth.TakeDamage(damageAmount, shotHit.point);
             }
 
