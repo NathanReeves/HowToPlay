@@ -15,6 +15,7 @@ TagManager:
   - FirstCam
   - Ground
   - Spike
+  - Enemy
   layers:
   - Default
   - TransparentFX

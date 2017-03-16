@@ -6,18 +6,17 @@ public class SandCharMelee : MonoBehaviour
 {
     // Serialized fields
     [SerializeField]
-    int dps = 20;
+    private int damageAmount = 20;
     [SerializeField]
-    float attackCooldown = 0.5f;
+    private float attackCooldown = 0.5f;
     [SerializeField]
-    float attackRange = 3f;
+    private float attackRange = 3f;
 
     // Private fields
-    float timer;
-    Ray attack;
-    RaycastHit attackHit;
-    int hitableMask;
-    LineRenderer attackLine;
+    private float timer;
+    private int hitableMask;
+    private bool hitable;
+    SandEnemyHealth enemyHealth;
     //ParticleSystem meleeParticles;
     //AudioSource meleeAudio;
     //float effectsDisplayTime = 0.2f;
@@ -31,18 +30,19 @@ public class SandCharMelee : MonoBehaviour
         // Setup references
         //meleeParticles = GetComponent<ParticleSystem>();
         //meleeAudio = GetComponent<AudioSource>();
-        attackLine = GetComponent<LineRenderer>();
     }
 
     void Update()
     {
+        Debug.Log(enemyHealth);
+
         // Increase timer since Update was called
         timer += Time.deltaTime;
 
-        // If player is firing and shotCooldown isn't active...
+        // If player is swinging melee weapon and attackCooldown isn't active...
         if (Input.GetButton("Fire1") && timer >= attackCooldown)
         {
-            // ... shoot!
+            // ... attack!
             Attack();
         }
 
@@ -54,6 +54,29 @@ public class SandCharMelee : MonoBehaviour
             DisableEffects();
         }
         */
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // If colliding with an enemy hitbox...
+        if (other.CompareTag("Enemy"))
+        {
+            // ... set hitable to true
+            hitable = true;
+
+            // Also make note of enemy being hit (so we know who's health to decrease)
+            enemyHealth = other.GetComponentInParent<SandEnemyHealth>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // If leaving an enemy hitbox...
+        if (other.CompareTag("Enemy"))
+        {
+            // ... set hitable to false
+            hitable = false;
+        }
     }
 
     void Attack()
@@ -68,34 +91,11 @@ public class SandCharMelee : MonoBehaviour
         //gunParticles.Stop();
         //gunParticles.Play();
 
-        // Set first point of visible attack line
-        attackLine.enabled = true;
-        attackLine.SetPosition(0, transform.position);
-
-        // Set first point & direction of attack ray 
-        attack.origin = transform.position;
-        attack.direction = transform.right;
-
-        // Raycast against hitable objects; if it hits anything...
-        if (Physics.Raycast(attack, out attackHit, attackRange, hitableMask))
+        // If enemy is hitable and has health...
+        if (hitable && enemyHealth != null)
         {
-            // See if hit object has EnemyHealth script
-            SandEnemyHealth enemyHealth = attackHit.collider.GetComponent<SandEnemyHealth>();
-
-            // If hit object does have EnemyHelth, it takes damage
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(dps, attackHit.point);
-            }
-
-            // Set end of line renderer at hit object
-            attackLine.SetPosition(1, attackHit.point);
-        }
-        // Otherwise, if didn't hit anything...
-        else
-        {
-            // ... extend attack line out to range limit
-            attackLine.SetPosition(1, attack.origin + attack.direction * attackRange);
+            // ... attack it and subtract damageAmount from their health
+            enemyHealth.currentHealth -= damageAmount;
         }
     }
 }
