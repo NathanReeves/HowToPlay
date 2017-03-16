@@ -242,9 +242,11 @@ public class SandCharController : MonoBehaviour
             // Switch to twin stick controls (only weapon swinging)
             moveZone = 3;
 
-            // Show arm and sword
+            // Show sword and enable melee attack
             this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+            this.gameObject.transform.GetChild(3).gameObject.SetActive(true);
 
             // Switch to twin stick camera
             platCam.enabled = false;
@@ -257,9 +259,15 @@ public class SandCharController : MonoBehaviour
             // Switch to twin stick shooter controls (add shooting)
             moveZone = 4;
 
-            // Switch from showing melee to showing gun instead
+            // Hide melee weapon and disable melee attack
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
-            this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+            this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            this.gameObject.transform.GetChild(3).gameObject.SetActive(false);
+
+            // Show gun and enable shooting attack
+            this.gameObject.transform.GetChild(4).gameObject.SetActive(true);
+            this.gameObject.transform.GetChild(5).gameObject.SetActive(true);
         }
         if (other.gameObject.CompareTag("Enter3rdPerson"))
         {
