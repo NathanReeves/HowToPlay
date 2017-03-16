@@ -289,6 +289,18 @@ public class SandCharController : MonoBehaviour
             firstCam.enabled = true;
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("MovingGround"))
+        {
+            isGrounded = true;
+            if (!isGrounded)
+                isGrounded = true;
+            GetComponent<Animator>().SetBool("Grounded", true);
+            GetComponent<Animator>().SetBool("Jump", false);
+            playerRigidBody.transform.parent = collision.transform;
+        }
+    }
 
     private void OnCollisionStay(Collision collision)
     {
