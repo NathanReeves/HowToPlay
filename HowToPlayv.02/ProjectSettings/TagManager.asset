@@ -17,6 +17,8 @@ TagManager:
   - Spike
   - Enemy
   - MovingGround
+  - Key
+  - Door
   layers:
   - Default
   - TransparentFX
