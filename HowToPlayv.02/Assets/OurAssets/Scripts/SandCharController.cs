@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SandCharController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class SandCharController : MonoBehaviour
     [SerializeField]
     private Camera firstCam;
 
+	private int keyCount;
     private Vector3 movement;
     private Vector3 lastLook;
     private Rigidbody playerRigidBody;
@@ -27,9 +29,12 @@ public class SandCharController : MonoBehaviour
     Ray camRay;
     private float camRayLength = 100f;
     private int floorMask;
+	public Text keys;
 
     void Awake()
     {
+		keyCount = 0;
+		keys.text = "Keys: " + keyCount.ToString ();
         floorMask = LayerMask.GetMask("Floor");
         playerRigidBody = GetComponent<Rigidbody>();
 
@@ -45,6 +50,7 @@ public class SandCharController : MonoBehaviour
 		turn = false;
 		forward = true;
         moveZone = 2;
+		keys.gameObject.SetActive (false);
     }
 
     void FixedUpdate()
@@ -253,6 +259,7 @@ public class SandCharController : MonoBehaviour
             twinCam.enabled = true;
             thirdCam.enabled = false;
             firstCam.enabled = false;
+			keys.gameObject.SetActive (true);
         }
         if (other.gameObject.CompareTag("EnterTwinStickShoot"))
         {
@@ -288,6 +295,12 @@ public class SandCharController : MonoBehaviour
             thirdCam.enabled = false;
             firstCam.enabled = true;
         }
+		if (other.gameObject.CompareTag ("Key"))
+		{
+			other.gameObject.SetActive (false);
+			keyCount++;
+			keys.text = "Keys: " + keyCount.ToString ();
+		}
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -300,6 +313,13 @@ public class SandCharController : MonoBehaviour
             GetComponent<Animator>().SetBool("Jump", false);
             playerRigidBody.transform.parent = collision.transform;
         }
+		if (collision.gameObject.CompareTag ("Door") && keyCount > 0) 
+		{
+			collision.gameObject.SetActive (false);
+			keyCount--;
+			keys.text = "Keys: " + keyCount.ToString ();
+
+		}
     }
 
     private void OnCollisionStay(Collision collision)
@@ -322,6 +342,15 @@ public class SandCharController : MonoBehaviour
             GetComponent<Animator>().SetBool("Jump", false);
             playerRigidBody.transform.parent = collision.transform;
         }
+		/*
+		if (collision.gameObject.CompareTag ("Door") && keyCount > 0 && Input.GetKey("o")) 
+		{
+			collision.gameObject.SetActive (false);
+			keyCount--;
+			keys.text = "Keys: " + keyCount.ToString ();
+
+		}
+		*/
     }
     private void OnCollisionExit(Collision collision)
     {
