@@ -63,6 +63,7 @@
      <Compile Include="Assets\OurAssets\Scripts\SandEnemyMovePatrol.cs" />
      <Compile Include="Assets\OurAssets\Scripts\SandFixedCamController.cs" />
      <Compile Include="Assets\OurAssets\Scripts\SandFollowCamController.cs" />
+     <Compile Include="Assets\OurAssets\loadOnClick.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\TutorialInfo.cs" />
      <Compile Include="Assets\_CompletedAssets\MobileInput\Scripts\CrossPlatformInputManager.cs" />
      <Compile Include="Assets\_CompletedAssets\MobileInput\Scripts\Joystick.cs" />
