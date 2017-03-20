@@ -6,7 +6,7 @@ public class buttonTouched : MonoBehaviour {
 
 	GameObject cube;
 	public float downwardAmount;
-	private bool isSinking;
+	public bool isSinking;
 	private bool shouldStopSinking;
 	private bool defaultState;
 	//private int count = 30;
