@@ -84,10 +84,13 @@ public class SandCharController : MonoBehaviour
         // Use twin stick club controls when in twin stick club zone
         else if (moveZone == 3)
         {
-            
+            //gameObject.transform.localScale = new Vector3(4,4,4);
+            moveSpeed = 30;
+            jumpSpeed = 700;
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
             MoveTwinStickClub(moveHorizontal, moveVertical);
+            TurnTwinStickClub();
             if (Mathf.Abs(moveHorizontal) > 0 || Mathf.Abs(moveVertical) > 0)
             {
                 GetComponent<Animator>().SetBool("IsWalking", true);
@@ -153,7 +156,20 @@ public class SandCharController : MonoBehaviour
         // Move player
         playerRigidBody.MovePosition(transform.position + movement);
     }
+    private void TurnTwinStickClub()
+    {
+        Vector3 cameraForward = twinCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
+        cameraForward.y = 0f;
+        cameraForward = cameraForward.normalized;
 
+        Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
+
+        Vector3 target = Input.GetAxis("Fire2") * cameraRight + Input.GetAxis("Fire1") * cameraForward * -1;
+        //target = target.normalized * moveSpeed * Time.deltaTime;
+        //lastLook = target;
+    
+        playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
+    }
     private void MoveTwinStickClub(float horiz, float vert)
     {
 
@@ -180,7 +196,7 @@ public class SandCharController : MonoBehaviour
         lastLook = target;
         // Move player
         playerRigidBody.MovePosition(transform.position + target);
-        playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
+        //playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
     }
 
     private void MoveTwinStickShoot(float horiz, float vert)
