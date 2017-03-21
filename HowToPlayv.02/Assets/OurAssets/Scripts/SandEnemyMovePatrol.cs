@@ -11,21 +11,38 @@ public class SandEnemyMovePatrol : MonoBehaviour
     [SerializeField]
     private NavMeshAgent nav;
     [SerializeField]
-    private float patrolSize = 10f;
+    private float patrolZSize = 10f;
+    [SerializeField]
+    private float patrolXSize = 0f;
 
-    private float patrolBoundMin;
-    private float patrolBoundMax;
+    private float patrolZBoundMin;
+    private float patrolZBoundMax;
+    private float patrolXBoundMin;
+    private float patrolXBoundMax;
 
     void Awake()
     {
         // Setup references
         enemyHealth = GetComponent<SandEnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
-        patrolBoundMin = transform.position.z - patrolSize;
-        patrolBoundMax = transform.position.z + patrolSize;
 
-        // Start by moving left towards patrolBoundMin
-        nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolBoundMin));
+        // Setup patrol bounds based on x or z axis
+        if (patrolXSize == 0)
+        {
+            patrolZBoundMin = transform.position.z - patrolZSize;
+            patrolZBoundMax = transform.position.z + patrolZSize;
+
+            // Start by moving left towards patrolBoundMin
+            nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolZBoundMin));
+        }
+        else if (patrolZSize == 0)
+        {
+            patrolXBoundMin = transform.position.x - patrolXSize;
+            patrolXBoundMax = transform.position.x + patrolXSize;
+
+            // Start by moving left towards patrolBoundMin
+            nav.SetDestination(new Vector3(patrolXBoundMin, transform.position.y, transform.position.z));
+        }
     }
 
     void Update()
@@ -34,14 +51,14 @@ public class SandEnemyMovePatrol : MonoBehaviour
         if (enemyHealth.currentHealth > 0)
         {
             // ... patrol back and forth between min and max position:
-            if (transform.position.z == patrolBoundMin)
+            if (transform.position.z == patrolZBoundMin)
             {
-                nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolBoundMax));
+                nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolZBoundMax));
             }
             // If enemy has hit patrolBoundMax, move left again towards patrolBoundMin
-            else if (transform.position.z == patrolBoundMax)
+            else if (transform.position.z == patrolZBoundMax)
             {
-                nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolBoundMin));
+                nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolZBoundMin));
             }
         }
         // Otherwise...
