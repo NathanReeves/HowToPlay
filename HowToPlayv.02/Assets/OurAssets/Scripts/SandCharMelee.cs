@@ -67,6 +67,13 @@ public class SandCharMelee : MonoBehaviour
             // Also make note of enemy being hit (so we know who's health to decrease)
             enemyHealth = other.GetComponentInParent<SandEnemyHealth>();
         }
+
+        // If player collides with head collider on enemy...
+        if (other.GetType() == typeof(SphereCollider))
+        {
+            // ... destroy this enemy
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
