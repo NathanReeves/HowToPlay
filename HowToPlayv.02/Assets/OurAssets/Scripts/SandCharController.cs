@@ -187,11 +187,21 @@ public class SandCharController : MonoBehaviour
         //charShooting.enabled = false;
         //charMovement.enabled = false;
 
+        /*
         // Set player at last-reached checkpoint
         if (reachedCheckpoint == 0)
-            playerRigidBody.MovePosition(startPoint.transform.position);
+        {
+            this.enabled = false;
+            this.transform.position = startPoint.transform.position;
+            this.enabled = true;
+        }
         else if (reachedCheckpoint == 1)
-            playerRigidBody.MovePosition(checkpoint1.transform.position);
+        {
+            this.enabled = false;
+            this.transform.position = checkpoint1.transform.position;
+            this.enabled = true;
+        } 
+        */
 
         // Now that player has respawned, they're no longer dead
         charHealth.isDead = false;
