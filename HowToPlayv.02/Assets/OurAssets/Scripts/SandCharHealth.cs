@@ -21,9 +21,10 @@ public class SandCharHealth : MonoBehaviour
 
     //private Animator anim;
     //private AudioSource playerAudio;
+    
     private SandCharController charMovement;
     private SandCharShooting charShooting;
-    private bool isDead;
+    public bool isDead;
     private bool damaged;
 
     void Awake()
@@ -33,15 +34,19 @@ public class SandCharHealth : MonoBehaviour
         //playerAudio = GetComponent<AudioSource>();
         charMovement = GetComponent<SandCharController>();
         charShooting = GetComponent<SandCharShooting>();
+        
 
         // Initial health is current health at start of game
         currentHealth = startHealth;
+
+        
     }
 
     // Update is called once per frame
     void Update ()
     {
         Debug.Log("Player health: " + currentHealth);
+        Debug.Log("Player dead: " + isDead);
 
         // If the player has just been damaged...
         if (damaged)
@@ -76,27 +81,7 @@ public class SandCharHealth : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             // ... player is killed
-            Dead();
+            charMovement.RespawnToCheckpoint();
         }
-    }
-
-    void Dead()
-    {
-        // Set death flag so this function is only called once
-        isDead = true;
-
-        // Turn off any player shooting effects
-        //charShooting.DisableEffects();
-
-        // Tell animator that player is dead
-        //anim.SetTrigger("Die");
-
-        // Play death audio
-        //playerAudio.clip = deathClip;
-        //playerAudio.Play();
-
-        // Turn off movement and shooting scripts
-        charShooting.enabled = false;
-        charMovement.enabled = false;
     }
 }

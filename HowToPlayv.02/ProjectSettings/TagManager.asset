@@ -19,6 +19,7 @@ TagManager:
   - MovingGround
   - Key
   - Door
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
