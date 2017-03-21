@@ -18,23 +18,28 @@ public class SandCharController : MonoBehaviour
     [SerializeField]
     private Camera firstCam;
 
-	private int keyCount;
+    private int reachedCheckpoint;
+    private GameObject startPoint;
+    private GameObject checkpoint1;
+    private SandCharHealth charHealth;
+
+    private int keyCount;
     private Vector3 movement;
     private Vector3 lastLook;
     private Rigidbody playerRigidBody;
     private int moveZone = 1;
     private bool isGrounded;
-	bool turn;
-	bool forward;
+    bool turn;
+    bool forward;
     Ray camRay;
     private float camRayLength = 100f;
     private int floorMask;
-	public Text keys;
+    public Text keys;
 
     void Awake()
     {
-		keyCount = 0;
-		keys.text = "Keys: " + keyCount.ToString ();
+        keyCount = 0;
+        keys.text = "Keys: " + keyCount.ToString();
         floorMask = LayerMask.GetMask("Floor");
         playerRigidBody = GetComponent<Rigidbody>();
 
@@ -47,14 +52,25 @@ public class SandCharController : MonoBehaviour
         twinCam.enabled = false;
         thirdCam.enabled = false;
         firstCam.enabled = false;
-		turn = false;
-		forward = true;
+        turn = false;
+        forward = true;
         moveZone = 2;
-		keys.gameObject.SetActive (false);
+        keys.gameObject.SetActive(false);
+
+        startPoint = GetComponent<GameObject>();
+        checkpoint1 = GetComponent<GameObject>();
+        charHealth = GetComponent<SandCharHealth>();
+
+        // Set inital respawn point at start of platformer
+        reachedCheckpoint = 0;
     }
 
     void FixedUpdate()
     {
+        Debug.Log("Checkpoint: " + reachedCheckpoint);
+
+
+
         // Use platformer controls when in platformer zone
         if (moveZone == 1 || moveZone == 2)
         {
@@ -102,7 +118,7 @@ public class SandCharController : MonoBehaviour
             {
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
-            
+
         }
         // Use twin stick shooting controls when in twin stick shoot zone
         else if (moveZone == 4)
@@ -111,7 +127,7 @@ public class SandCharController : MonoBehaviour
             float moveVertical = Input.GetAxis("Vertical");
 
             //twinCam.GetComponent<Camera>().transform.forward.y  
-            MoveTwinStickShoot(moveHorizontal,  moveVertical);
+            MoveTwinStickShoot(moveHorizontal, moveVertical);
             TurnTwinStickShoot();
         }
         // Use 3rd/1st person controls when in 3rd/1st person zone
@@ -136,19 +152,49 @@ public class SandCharController : MonoBehaviour
         }
 
         // Check for jumping
-        if (isGrounded && (int)playerRigidBody.velocity.y == 0 && moveZone > 1 &&(Input.GetKey("joystick button 0") || Input.GetKey("space")))
+        if (isGrounded && (int)playerRigidBody.velocity.y == 0 && moveZone > 1 && (Input.GetKey("joystick button 0") || Input.GetKey("space")))
         {
             Jump();
         }
 
-		
-		//Check for turning
-		if (turn) {
-			Vector3 rot = transform.rotation.eulerAngles;
-			rot = new Vector3(rot.x,rot.y+180,rot.z);
-			transform.rotation = Quaternion.Euler(rot);
-			turn = false;
-		}
+
+        //Check for turning
+        if (turn)
+        {
+            Vector3 rot = transform.rotation.eulerAngles;
+            rot = new Vector3(rot.x, rot.y + 180, rot.z);
+            transform.rotation = Quaternion.Euler(rot);
+            turn = false;
+        }
+    }
+
+    public void RespawnToCheckpoint()
+    {
+        // Set death flag so this function is only called once
+        charHealth.isDead = true;
+
+        // Turn off any player shooting effects
+        //charShooting.DisableEffects();
+
+        // Tell animator that player is dead
+        //anim.SetTrigger("Die");
+
+        // Play death audio
+        //playerAudio.clip = deathClip;
+        //playerAudio.Play();
+
+        // Turn off movement and shooting scripts if last checkpoint was before twinstick
+        //charShooting.enabled = false;
+        //charMovement.enabled = false;
+
+        // Set player at last-reached checkpoint
+        if (reachedCheckpoint == 0)
+            playerRigidBody.MovePosition(startPoint.transform.position);
+        else if (reachedCheckpoint == 1)
+            playerRigidBody.MovePosition(checkpoint1.transform.position);
+
+        // Now that player has respawned, they're no longer dead
+        charHealth.isDead = false;
     }
 
     private void MovePlatformer(float horiz)
@@ -177,7 +223,7 @@ public class SandCharController : MonoBehaviour
         Vector3 target = Input.GetAxis("Fire2") * cameraRight + Input.GetAxis("Fire1") * cameraForward * -1;
         //target = target.normalized * moveSpeed * Time.deltaTime;
         //lastLook = target;
-    
+
         playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
     }
     private void MoveTwinStickClub(float horiz, float vert)
@@ -199,7 +245,7 @@ public class SandCharController : MonoBehaviour
         movement.Set(-vert, 0f, horiz);
 
         // Normalize movement
-        
+
         var axis = transform.position;
         Vector3 target = horiz * cameraRight + vert * cameraForward;
         target = target.normalized * moveSpeed * Time.deltaTime;
@@ -229,7 +275,7 @@ public class SandCharController : MonoBehaviour
         // Normalize movement
 
         var axis = transform.position;
-        
+
         Vector3 target = horiz * cameraRight + vert * cameraForward;
         //Vector3 target2 = horiz * Vector3.right + vert * Vector3.forward;
 
@@ -237,7 +283,7 @@ public class SandCharController : MonoBehaviour
         lastLook = target;
         // Move player
         playerRigidBody.MovePosition(transform.position + target);
-        
+
     }
     private void Turn3rd(float horiz, float vert)
     {
@@ -322,10 +368,25 @@ public class SandCharController : MonoBehaviour
     // Triggers for camera and move changes
     private void OnTriggerEnter(Collider other)
     {
+        // CHECKPOINT / RESPAWNING
+
+        // If player runs into a checkpoint...
+        if (other.CompareTag("Checkpoint"))
+        {
+            // Disable this checkpoint (so it doesn't increment twice)
+            other.enabled = false;
+            // Increment checkpoint counter
+            reachedCheckpoint++;
+        }
+
+
+
+        // GENRE SWITCHING
+
         if (other.gameObject.CompareTag("Enter2D"))
         {
             // Switch to 2D platformer controls (add jump)
-            moveZone = 2; 
+            moveZone = 2;
         }
         if (other.gameObject.CompareTag("EnterTwinStickClub"))
         {
@@ -343,7 +404,7 @@ public class SandCharController : MonoBehaviour
             twinCam.enabled = true;
             thirdCam.enabled = false;
             firstCam.enabled = false;
-			keys.gameObject.SetActive (true);
+            keys.gameObject.SetActive(true);
         }
         if (other.gameObject.CompareTag("EnterTwinStickShoot"))
         {
@@ -379,12 +440,12 @@ public class SandCharController : MonoBehaviour
             thirdCam.enabled = false;
             firstCam.enabled = true;
         }
-		if (other.gameObject.CompareTag ("Key"))
-		{
-			other.gameObject.SetActive (false);
-			keyCount++;
-			keys.text = "Keys: " + keyCount.ToString ();
-		}
+        if (other.gameObject.CompareTag("Key"))
+        {
+            other.gameObject.SetActive(false);
+            keyCount++;
+            keys.text = "Keys: " + keyCount.ToString();
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -397,13 +458,13 @@ public class SandCharController : MonoBehaviour
             GetComponent<Animator>().SetBool("Jump", false);
             playerRigidBody.transform.parent = collision.transform;
         }
-		if (collision.gameObject.CompareTag ("Door") && keyCount > 0) 
-		{
-			collision.gameObject.SetActive (false);
-			keyCount--;
-			keys.text = "Keys: " + keyCount.ToString ();
+        if (collision.gameObject.CompareTag("Door") && keyCount > 0)
+        {
+            collision.gameObject.SetActive(false);
+            keyCount--;
+            keys.text = "Keys: " + keyCount.ToString();
 
-		}
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -426,7 +487,7 @@ public class SandCharController : MonoBehaviour
             GetComponent<Animator>().SetBool("Jump", false);
             playerRigidBody.transform.parent = collision.transform;
         }
-		/*
+        /*
 		if (collision.gameObject.CompareTag ("Door") && keyCount > 0 && Input.GetKey("o")) 
 		{
 			collision.gameObject.SetActive (false);
@@ -440,7 +501,7 @@ public class SandCharController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            
+
             isGrounded = false;
             GetComponent<Animator>().SetBool("Grounded", false);
         }
@@ -455,8 +516,8 @@ public class SandCharController : MonoBehaviour
 
     private void Jump()
     {
-		GetComponent<Animator> ().SetBool ("Jump", true);
-		GetComponent<Animator> ().SetBool ("Grounded", false);
+        GetComponent<Animator>().SetBool("Jump", true);
+        GetComponent<Animator>().SetBool("Grounded", false);
         //isGrounded = false;
         playerRigidBody.AddForce(Vector3.up * jumpSpeed);
     }
