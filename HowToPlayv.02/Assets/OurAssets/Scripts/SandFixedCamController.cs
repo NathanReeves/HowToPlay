@@ -18,6 +18,7 @@ public class SandFixedCamController : MonoBehaviour
 	void Start ()
     {
         //character = this.transform.gameObject;
+   
 	}
 	
 	// Update is called once per frame
@@ -32,7 +33,7 @@ public class SandFixedCamController : MonoBehaviour
         smoothV.y = Mathf.Lerp(smoothV.y, mouseChange.y, 1f / smoothing);
         mouseLook += smoothV;*/
 		//transform.localRotation = Quaternion.AngleAxis(-mouseLook.x, Vector3.up);
-
+        
 		//3rd person
 		var rot = new Vector2(0f, 0f);
 		/*// rotates Camera Left
@@ -59,24 +60,28 @@ public class SandFixedCamController : MonoBehaviour
         //rot.y += Input.GetAxis("Fire1");
         //rot.x += (.5f)*Input.GetAxis("Fire2");
         
-        if (Math.Abs(Input.GetAxis("Fire2")) > .9)
+        if (Math.Abs(Input.GetAxis("Fire2")) > .1)
         {
-            rot.x -= .25f*Input.GetAxis("Fire2");
+            rot.x -= Input.GetAxis("Fire2");
             
         }
-        if (Math.Abs(Input.GetAxis("Fire1")) > .9)
+        if (Math.Abs(Input.GetAxis("Fire1")) > .1)
         {
-            rot.y += .25f * Input.GetAxis("Fire1");
+            rot.y +=  Input.GetAxis("Fire1");
 
         }
         transform.Translate(rot);
+        if (gameObject.transform.rotation.x < 0)
+        {
+            transform.Translate(new Vector2(0,1));
+        }
         rot = new Vector2();
 		transform.LookAt(character.transform);
+        
+        ///first person
 
-		///first person
-
-		//transform.Rotate(rot);
-		//transform.localRotation = Quaternion.Euler (rot);
+        //transform.Rotate(rot);
+        //transform.localRotation = Quaternion.Euler (rot);
         //transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         //character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
     }
