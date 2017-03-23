@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/OurAssets/PlayTest.unity
+- path: Assets/OurAssets/PlayTestNarrationTest.unity
   isLoaded: 1
   isActive: 1
