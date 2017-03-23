@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class SandCharHealth : MonoBehaviour
 {
-    [SerializeField]
-    private int startHealth = 100;
+    public int startHealth = 100;
     public int currentHealth;
     //[SerializeField]
     //private Slider healthBar;
@@ -24,6 +23,7 @@ public class SandCharHealth : MonoBehaviour
     
     private SandCharController charMovement;
     private SandCharShooting charShooting;
+    private SandCharCheckpoint charCheckpoint;
     public bool isDead;
     private bool damaged;
 
@@ -34,12 +34,10 @@ public class SandCharHealth : MonoBehaviour
         //playerAudio = GetComponent<AudioSource>();
         charMovement = GetComponent<SandCharController>();
         charShooting = GetComponent<SandCharShooting>();
-        
+        charCheckpoint = GetComponent<SandCharCheckpoint>();
 
         // Initial health is current health at start of game
         currentHealth = startHealth;
-
-        
     }
 
     // Update is called once per frame
@@ -81,7 +79,7 @@ public class SandCharHealth : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             // ... player is killed
-            charMovement.RespawnToCheckpoint();
+            charCheckpoint.RespawnToCheckpoint();
         }
     }
 }

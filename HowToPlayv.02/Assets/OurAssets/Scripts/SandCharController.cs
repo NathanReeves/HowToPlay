@@ -18,11 +18,6 @@ public class SandCharController : MonoBehaviour
     [SerializeField]
     private Camera firstCam;
 
-    private int reachedCheckpoint;
-    private GameObject startPoint;
-    private GameObject checkpoint1;
-    private SandCharHealth charHealth;
-
     private int keyCount;
     private Vector3 movement;
     private Vector3 lastLook;
@@ -56,20 +51,11 @@ public class SandCharController : MonoBehaviour
         forward = true;
         moveZone = 2;
         keys.gameObject.SetActive(false);
-
-        startPoint = GetComponent<GameObject>();
-        checkpoint1 = GetComponent<GameObject>();
-        charHealth = GetComponent<SandCharHealth>();
-
-        // Set inital respawn point at start of platformer
-        reachedCheckpoint = 0;
     }
 
     void FixedUpdate()
     {
-        Debug.Log("Checkpoint: " + reachedCheckpoint);
-
-
+        Debug.Log("Player pos: " + this.transform.position);
 
         // Use platformer controls when in platformer zone
         if (moveZone == 1 || moveZone == 2)
@@ -168,44 +154,7 @@ public class SandCharController : MonoBehaviour
         }
     }
 
-    public void RespawnToCheckpoint()
-    {
-        // Set death flag so this function is only called once
-        charHealth.isDead = true;
 
-        // Turn off any player shooting effects
-        //charShooting.DisableEffects();
-
-        // Tell animator that player is dead
-        //anim.SetTrigger("Die");
-
-        // Play death audio
-        //playerAudio.clip = deathClip;
-        //playerAudio.Play();
-
-        // Turn off movement and shooting scripts if last checkpoint was before twinstick
-        //charShooting.enabled = false;
-        //charMovement.enabled = false;
-
-        /*
-        // Set player at last-reached checkpoint
-        if (reachedCheckpoint == 0)
-        {
-            this.enabled = false;
-            this.transform.position = startPoint.transform.position;
-            this.enabled = true;
-        }
-        else if (reachedCheckpoint == 1)
-        {
-            this.enabled = false;
-            this.transform.position = checkpoint1.transform.position;
-            this.enabled = true;
-        } 
-        */
-
-        // Now that player has respawned, they're no longer dead
-        charHealth.isDead = false;
-    }
 
     private void MovePlatformer(float horiz)
     {
@@ -378,19 +327,6 @@ public class SandCharController : MonoBehaviour
     // Triggers for camera and move changes
     private void OnTriggerEnter(Collider other)
     {
-        // CHECKPOINT / RESPAWNING
-
-        // If player runs into a checkpoint...
-        if (other.CompareTag("Checkpoint"))
-        {
-            // Disable this checkpoint (so it doesn't increment twice)
-            other.enabled = false;
-            // Increment checkpoint counter
-            reachedCheckpoint++;
-        }
-
-
-
         // GENRE SWITCHING
 
         if (other.gameObject.CompareTag("Enter2D"))
