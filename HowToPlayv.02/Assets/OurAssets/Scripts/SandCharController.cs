@@ -459,7 +459,17 @@ public class SandCharController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("MovingGround"))
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, 0, playerRigidBody.velocity.z);
+                if (!isGrounded)
+                    isGrounded = true;                  
+            GetComponent<Animator>().SetBool("Grounded", true);
+            GetComponent<Animator>().SetBool("Jump", false);
+            playerRigidBody.transform.parent = collision.transform;
+        }
+       
+            if (collision.gameObject.CompareTag("MovingGround"))
         {
             isGrounded = true;
             if (!isGrounded)
@@ -482,11 +492,13 @@ public class SandCharController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
-            if (!isGrounded)
-                isGrounded = true;
+            
+                if (!isGrounded)
+                    isGrounded = true;
+            
             GetComponent<Animator>().SetBool("Grounded", true);
             GetComponent<Animator>().SetBool("Jump", false);
+            Debug.Log(playerRigidBody.velocity.x + " "+ playerRigidBody.velocity.y+ " "+ playerRigidBody.velocity.z);
         }
         if (collision.gameObject.CompareTag("MovingGround"))
         {
