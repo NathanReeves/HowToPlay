@@ -21,6 +21,7 @@ TagManager:
   - Door
   - Checkpoint
   - Start
+  - Wall
   layers:
   - Default
   - TransparentFX
