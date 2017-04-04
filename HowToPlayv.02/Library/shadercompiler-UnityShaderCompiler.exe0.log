@@ -1,28 +1,2 @@
 Base path: C:/Program Files/Unity/Editor/Data
 Cmd: getPlatforms
-Cmd: preprocess
-  insize=3680 outsize=577 ok=1
-Cmd: preprocess
-  insize=1223 outsize=372 ok=1
-Cmd: preprocess
-  insize=6790 outsize=666 ok=1
-Cmd: preprocess
-  insize=1262 outsize=290 ok=1
-Cmd: preprocess
-  insize=2328 outsize=616 ok=1
-Cmd: preprocess
-  insize=6423 outsize=844 ok=1
-Cmd: preprocess
-  insize=6723 outsize=728 ok=1
-Cmd: preprocess
-  insize=851 outsize=262 ok=1
-Cmd: preprocess
-  insize=1331 outsize=259 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=768 outsize=898 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=768 outsize=478 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=18516 outsize=1126 kw=SHADOWS_SPLIT_SPHERES SHADOWS_SINGLE_CASCADE pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=18516 outsize=1426 kw=SHADOWS_SPLIT_SPHERES SHADOWS_SINGLE_CASCADE pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
