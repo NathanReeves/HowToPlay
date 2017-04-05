@@ -22,6 +22,9 @@ TagManager:
   - Checkpoint
   - Start
   - Wall
+  - JustTextPanel
+  - TextAndImage
+  - ControllerLeftAnalogImage
   layers:
   - Default
   - TransparentFX

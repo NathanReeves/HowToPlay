@@ -5,7 +5,8 @@
       <File FileName="Assets\OurAssets\ButtonAssets\buttonTouched.cs" Line="1" Column="1" />
       <File FileName="Assets\OurAssets\Scripts\SandCharController.cs" Line="1" Column="1" />
       <File FileName="Assets\OurAssets\loadOnClick.cs" Line="1" Column="1" />
-      <File FileName="Assets\OurAssets\changeText.cs" Line="61" Column="27" />
+      <File FileName="Assets\OurAssets\changeText.cs" Line="113" Column="17" />
+      <File FileName="Assets\OurAssets\TriggerPopup.cs" Line="17" Column="51" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
