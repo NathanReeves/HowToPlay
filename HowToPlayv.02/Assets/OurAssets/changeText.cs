@@ -17,6 +17,9 @@ public class changeText : MonoBehaviour {
 
 	Image ControllerLeftAnalogImage;
 	Image ControllerJumpImage;
+	Image ControllerRightAnalogImage;
+
+
 
 	//bool startOfGame;
 	Canvas canv;
@@ -52,6 +55,7 @@ public class changeText : MonoBehaviour {
 		Image [] arr2 = TextAndImage.GetComponentsInChildren<Image> ();
 		ControllerLeftAnalogImage = arr2 [1];
 		ControllerJumpImage = arr2 [2];
+		ControllerRightAnalogImage = arr2[3];
 
 
 		//Image[] obj = ControllerLeftAnalogImage.GetComponentInParent<Image>()
@@ -72,9 +76,11 @@ public class changeText : MonoBehaviour {
 		messages [0] = "Welcome to How To Play: The Game!";
 		messages [1] = "Move the stick to move right or left!";
 		messages [2] = "Move the stick to the left to move left!";
+		messages [3] = "Now you can move the left stick to move in any direction!";
+		messages [4] = "Move the right stick to look around without moving!";
 
 		//run the trigger method right at the beginning for the intro pop up
-		isTriggered(0, false);
+		isTriggered(0, -1);
 
 	}
 	
@@ -97,6 +103,10 @@ public class changeText : MonoBehaviour {
 				JustTextPanel.gameObject.SetActive (false);
 				TextAndImage.gameObject.SetActive (false);
 
+				ControllerLeftAnalogImage.gameObject.SetActive(false);
+				ControllerJumpImage.gameObject.SetActive(false);
+				ControllerRightAnalogImage.gameObject.SetActive(false);
+
 				shutOffTime = 2.5f;
 				nowCountingTime = false;
 
@@ -107,9 +117,9 @@ public class changeText : MonoBehaviour {
 
 
 	//method should be ran when a trigger is encountered in the game world causing a text to pop up.
-	public void isTriggered(int messageNumber, bool imageEnabled){
+	public void isTriggered(int messageNumber, int numOfImage){
 		canv.gameObject.SetActive (true);
-		if (!imageEnabled) {
+		if (numOfImage == -1) {
 			JustTextPanel.gameObject.SetActive (true);
 			//text.GetComponent<Renderer> ().enabled = true;
 			//canv.gameObject.SetActive (true);
@@ -117,6 +127,16 @@ public class changeText : MonoBehaviour {
 			justText.text = messages [messageNumber];
 		} else {
 			TextAndImage.gameObject.SetActive (true);
+			if (numOfImage == 0){
+				ControllerLeftAnalogImage.gameObject.SetActive(true);
+			}
+			else if (numOfImage == 1){
+				ControllerJumpImage.gameObject.SetActive(true);
+			}
+			else if (numOfImage == 2){
+				ControllerRightAnalogImage.gameObject.SetActive(true);
+			}
+
 			textPartOfImage.text = messages [messageNumber];
 		}
 
