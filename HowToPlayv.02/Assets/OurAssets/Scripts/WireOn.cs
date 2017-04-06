@@ -14,6 +14,6 @@ public class WireOn : MonoBehaviour {
 	void Update () {
 
         gameObject.GetComponent<MeshRenderer>().material = coloredCube.GetComponent<MeshRenderer>().material;
-        enabled = false;
+        //enabled = false;
     }
 }
