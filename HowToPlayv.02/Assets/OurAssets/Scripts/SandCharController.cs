@@ -38,7 +38,7 @@ public class SandCharController : MonoBehaviour
         keys.text = "Keys: " + keyCount.ToString();
         floorMask = LayerMask.GetMask("Floor");
         playerRigidBody = GetComponent<Rigidbody>();
-
+        Physics.gravity = new Vector3(0, -25f, 0);
         platCam = platCam.GetComponent<Camera>();
         twinCam = twinCam.GetComponent<Camera>();
         thirdCam = thirdCam.GetComponent<Camera>();
@@ -162,7 +162,7 @@ public class SandCharController : MonoBehaviour
 
     private void MovePlatformer(float horiz)
     {
-        Physics.gravity = new Vector3(0, -25f, 0);
+        
         // Set movement/rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
 
