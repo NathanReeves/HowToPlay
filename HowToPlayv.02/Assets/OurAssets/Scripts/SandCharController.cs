@@ -167,13 +167,13 @@ public class SandCharController : MonoBehaviour
         playerRigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
 
         // Set movement according to input
-        movement.Set(0f, 0f, horiz);
+        movement.Set(0f, playerRigidBody.velocity.y, horiz*moveSpeed);
 
         // Normalize movement
-        movement = movement * moveSpeed * Time.deltaTime;
-
+        //movement = movement * moveSpeed * Time.deltaTime;
+        playerRigidBody.velocity = movement;
         // Move player
-        playerRigidBody.MovePosition(transform.position + movement);
+        //playerRigidBody.MovePosition(transform.position + movement);
     }
     private void TurnTwinStickClub()
     {
