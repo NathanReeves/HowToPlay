@@ -92,7 +92,7 @@ public class SandCharController : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
             MoveTwinStickClub(moveHorizontal, moveVertical);
-            TurnTwinStickClub();
+            //TurnTwinStickClub();
             if (Mathf.Abs(moveHorizontal) > 0 || Mathf.Abs(moveVertical) > 0)
             {
                 GetComponent<Animator>().SetBool("IsWalking", true);
@@ -115,7 +115,7 @@ public class SandCharController : MonoBehaviour
 
             //twinCam.GetComponent<Camera>().transform.forward.y  
             MoveTwinStickShoot(moveHorizontal, moveVertical);
-            TurnTwinStickShoot();
+            //TurnTwinStickShoot();
         }
         // Use 3rd/1st person controls when in 3rd/1st person zone
         else if (moveZone == 5 | moveZone == 6)
@@ -138,7 +138,7 @@ public class SandCharController : MonoBehaviour
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
             Move3rd(strafeLeftRight, moveForwardBack);
-            Turn3rd(strafeLeftRight, moveForwardBack);
+            //Turn3rd(strafeLeftRight, moveForwardBack);
         }
 
         // Check for jumping
