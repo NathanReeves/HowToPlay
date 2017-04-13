@@ -395,7 +395,7 @@ public class SandCharController : MonoBehaviour
                     isGrounded = true;                  
             GetComponent<Animator>().SetBool("Grounded", true);
             GetComponent<Animator>().SetBool("Jump", false);
-            playerRigidBody.transform.parent = collision.transform;
+            //playerRigidBody.transform.position = collision.transform.position;
         }
        
             if (collision.gameObject.CompareTag("MovingGround"))
