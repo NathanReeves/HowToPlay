@@ -69,7 +69,7 @@ public class SandCharCheckpoint : MonoBehaviour
         {
             // Disable this checkpoint's trigger so it doesn't increment more than once
             other.GetComponent<MeshRenderer>().enabled = false;
-            other.GetComponent<CapsuleCollider>().enabled = false;
+            other.GetComponent<BoxCollider>().enabled = false;
 
             // Increment checkpoint counter
             reachedCheckpoint++;

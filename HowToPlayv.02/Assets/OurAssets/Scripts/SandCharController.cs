@@ -21,6 +21,7 @@ public class SandCharController : MonoBehaviour
     private int keyCount;
     private Vector3 movement;
     private Vector3 lastLook;
+    private Vector3 Last;
     private Rigidbody playerRigidBody;
     private int moveZone = 1;
     private bool isGrounded;
@@ -37,7 +38,7 @@ public class SandCharController : MonoBehaviour
         keys.text = "Keys: " + keyCount.ToString();
         floorMask = LayerMask.GetMask("Floor");
         playerRigidBody = GetComponent<Rigidbody>();
-
+        Physics.gravity = new Vector3(0, -25f, 0);
         platCam = platCam.GetComponent<Camera>();
         twinCam = twinCam.GetComponent<Camera>();
         thirdCam = thirdCam.GetComponent<Camera>();
@@ -91,7 +92,7 @@ public class SandCharController : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
             MoveTwinStickClub(moveHorizontal, moveVertical);
-            TurnTwinStickClub();
+            //TurnTwinStickClub();
             if (Mathf.Abs(moveHorizontal) > 0 || Mathf.Abs(moveVertical) > 0)
             {
                 GetComponent<Animator>().SetBool("IsWalking", true);
@@ -114,11 +115,13 @@ public class SandCharController : MonoBehaviour
 
             //twinCam.GetComponent<Camera>().transform.forward.y  
             MoveTwinStickShoot(moveHorizontal, moveVertical);
-            TurnTwinStickShoot();
+            //TurnTwinStickShoot();
         }
         // Use 3rd/1st person controls when in 3rd/1st person zone
         else if (moveZone == 5 | moveZone == 6)
         {
+            moveSpeed = 20;
+            jumpSpeed = 800;
             // Move player forward, back, left, right
             float moveForwardBack = Input.GetAxis("Vertical");
             float strafeLeftRight = Input.GetAxis("Horizontal");
@@ -135,6 +138,7 @@ public class SandCharController : MonoBehaviour
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
             Move3rd(strafeLeftRight, moveForwardBack);
+            //Turn3rd(strafeLeftRight, moveForwardBack);
         }
 
         // Check for jumping
@@ -158,18 +162,18 @@ public class SandCharController : MonoBehaviour
 
     private void MovePlatformer(float horiz)
     {
-        Physics.gravity = new Vector3(0, -25f, 0);
+        
         // Set movement/rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
 
         // Set movement according to input
-        movement.Set(0f, 0f, horiz);
+        movement.Set(0f, playerRigidBody.velocity.y, horiz*moveSpeed);
 
         // Normalize movement
-        movement = movement * moveSpeed * Time.deltaTime;
-
+        //movement = movement * moveSpeed * Time.deltaTime;
+        playerRigidBody.velocity = movement;
         // Move player
-        playerRigidBody.MovePosition(transform.position + movement);
+        //playerRigidBody.MovePosition(transform.position + movement);
     }
     private void TurnTwinStickClub()
     {
@@ -244,33 +248,34 @@ public class SandCharController : MonoBehaviour
         playerRigidBody.MovePosition(transform.position + target);
 
     }
-    private void Turn3rd(float horiz, float vert)
+    private void Turn3rd(float horizontal, float vertical)
     {
 
-        Transform cameraTransform = thirdCam.GetComponent<Camera>().transform;
-        // forward of the camera on the x-z plane
-        Vector3 cameraForward = thirdCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
-        cameraForward.y = 0f;
-        cameraForward = cameraForward.normalized;
 
-        Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
+        // Get camera forward direction, without vertical component.
 
+        Vector3 forward = thirdCam.transform.forward;
 
-        // Set rotation constraints
-        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        // Player is moving on ground, Y component of camera facing is not relevant.
+        forward.y = 0.0f;
+        forward = forward.normalized;
 
-        // Set movement according to input
-        movement.Set(-vert, 0f, horiz);
+        // Calculate target direction based on camera forward and direction key.
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 targetDirection;
+        targetDirection = forward * vertical + right * horizontal;
+        if (targetDirection.x == 0 && targetDirection.z == 0)
+        {
+            targetDirection = Last;
+        }
+        else
+        {
+            Last = targetDirection;
+        }
 
-        // Normalize movement
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        playerRigidBody.MoveRotation(targetRotation);
 
-        var axis = transform.position;
-        Vector3 target = horiz * cameraRight + vert * cameraForward;
-        target = target.normalized * moveSpeed * Time.deltaTime;
-        lastLook = target;
-        // Move player
-        playerRigidBody.MovePosition(transform.position + target);
-        //playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
     }
     private void MoveTwinStickShoot(float horiz, float vert)
     {

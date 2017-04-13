@@ -85,10 +85,13 @@
     <Compile Include="Assets\OurAssets\ButtonAssets\SandCharVairableJump.cs" />
     <Compile Include="Assets\OurAssets\ButtonAssets\buttonTouched.cs" />
     <Compile Include="Assets\OurAssets\ButtonAssets\leverTouch.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\ClockScript.cs" />
     <Compile Include="Assets\OurAssets\Scripts\EnemyControl.cs" />
     <Compile Include="Assets\OurAssets\Scripts\EnemyDie.cs" />
     <Compile Include="Assets\OurAssets\Scripts\EnemyKill.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\LaserOff.cs" />
     <Compile Include="Assets\OurAssets\Scripts\MovingPlatform.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\MovingPlatform2.cs" />
     <Compile Include="Assets\OurAssets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharCheckpoint.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharController.cs" />
@@ -102,6 +105,9 @@
     <Compile Include="Assets\OurAssets\Scripts\SandEnemyMovePatrol.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandFixedCamController.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandFollowCamController.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\ThirdPersonOrbitCam.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\WireOn.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\WireOnCombination.cs" />
     <Compile Include="Assets\OurAssets\TriggerPopup.cs" />
     <Compile Include="Assets\OurAssets\changeText.cs" />
     <Compile Include="Assets\OurAssets\loadOnClick.cs" />
