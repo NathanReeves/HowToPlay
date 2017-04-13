@@ -93,6 +93,7 @@
     <Compile Include="Assets\OurAssets\Scripts\MovingPlatform.cs" />
     <Compile Include="Assets\OurAssets\Scripts\MovingPlatform2.cs" />
     <Compile Include="Assets\OurAssets\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\Rotator.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharCheckpoint.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharController.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharHealth.cs" />
