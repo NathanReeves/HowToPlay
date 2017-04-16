@@ -178,12 +178,23 @@ public class SandCharController : MonoBehaviour
     }
     private void TurnTwinStickClub()
     {
-        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        //playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         //Vector3 target = Input.GetAxis("Fire2")*Vector3.forward + Input.GetAxis("Fire1") * Vector3.right ;
         //target = target.normalized * moveSpeed * Time.deltaTime;
         //lastLook = target;
-        playerRigidBody.transform.Rotate(Input.GetAxis("Fire1"), Input.GetAxis("Fire2"), 0);
+        //playerRigidBody.transform.Rotate(Input.GetAxis("Fire1"), Input.GetAxis("Fire2"), 0);
         //playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
+        Vector3 cameraForward = twinCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
+        cameraForward.y = 0f;
+        cameraForward = cameraForward.normalized;
+
+        Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
+
+        Vector3 target = Input.GetAxis("Fire2") * cameraRight + Input.GetAxis("Fire1") * cameraForward * -1;
+        //target = target.normalized * moveSpeed * Time.deltaTime;
+        
+        playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
+        
     }
     private void MoveTwinStickClub(float horiz, float vert)
     {
@@ -290,12 +301,20 @@ public class SandCharController : MonoBehaviour
 
     private void TurnTwinStickShoot()
     {
-        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        //Vector3 target = Input.GetAxis("Fire2") * Vector3.forward + Input.GetAxis("Fire1") * Vector3.right;
-        //target = target.normalized * moveSpeed * Time.deltaTime;
-        //lastLook = target;
+        // Create a ray
+        camRay = twinCam.ScreenPointToRay(Input.mousePosition);
+        // Setup RaycastHit to get info from ray
+        RaycastHit floorHit;
 
-        playerRigidBody.transform.Rotate(Input.GetAxis("Fire1"), Input.GetAxis("Fire2"), 0);
+        // If raycast hits anything...
+        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+        {
+            Vector3 playerToMouse = floorHit.point - transform.position;
+            playerToMouse.y = 0; // Make sure player isn't leaning in y axis
+
+            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+            playerRigidBody.MoveRotation(newRotation);
+        }
     }
 
     private void MoveThirdFirst(float forBack, float strafe)
