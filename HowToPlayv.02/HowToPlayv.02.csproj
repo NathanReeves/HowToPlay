@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ButtonDoorScript.cs" />
+    <Compile Include="Assets\MovingBox.cs" />
     <Compile Include="Assets\OurAssets\ButtonAssets\SandCharVairableJump.cs" />
     <Compile Include="Assets\OurAssets\ButtonAssets\buttonTouched.cs" />
     <Compile Include="Assets\OurAssets\ButtonAssets\leverTouch.cs" />
