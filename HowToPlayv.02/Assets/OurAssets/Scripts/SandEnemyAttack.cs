@@ -7,7 +7,7 @@ public class SandEnemyAttack : MonoBehaviour
     [SerializeField]
     private float attackCooldown = 0.5f;
     [SerializeField]
-    private int attackDamage = 10;
+    private int attackDamage = 25;
 
     //private Animator anim;
     private GameObject player;
@@ -25,6 +25,7 @@ public class SandEnemyAttack : MonoBehaviour
         //anim = GetComponent<Animator>();
 	}
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         // If enemy is colliding with player...
@@ -34,11 +35,33 @@ public class SandEnemyAttack : MonoBehaviour
             playerInAttackRange = true;
         }
     }
+    */
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        // If enemy is colliding with player...
+        if (collision.gameObject == player)
+        {
+            // ... player is in attack range
+            playerInAttackRange = true;
+        }
+    }
+
+    /*
     private void OnTriggerExit(Collider other)
     {
         // If enemy is moving away from player...
         if (other.gameObject == player)
+        {
+            // ... player is no longer in attack range
+            playerInAttackRange = false;
+        }
+    }
+    */
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject == player)
         {
             // ... player is no longer in attack range
             playerInAttackRange = false;

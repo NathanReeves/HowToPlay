@@ -6,11 +6,11 @@ public class SandCharMelee : MonoBehaviour
 {
     // Serialized fields
     [SerializeField]
-    private int damageAmount = 20;
+    private int damageAmount = 100;
     [SerializeField]
     private float attackCooldown = 0.5f;
     [SerializeField]
-    private float attackRange = 3f;
+    private float attackRange = 5f;
 
     // Private fields
     private float timer;
@@ -102,7 +102,7 @@ public class SandCharMelee : MonoBehaviour
         if (hitable && enemyHealth != null)
         {
             // ... attack it and subtract damageAmount from their health
-            enemyHealth.currentHealth -= damageAmount;
+            enemyHealth.TakeDamage(damageAmount);
         }
     }
 }

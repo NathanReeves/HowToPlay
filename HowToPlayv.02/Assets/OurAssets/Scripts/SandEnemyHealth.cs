@@ -7,19 +7,19 @@ public class SandEnemyHealth : MonoBehaviour
     [SerializeField]
     private int startingHealth = 100;
     public int currentHealth;
-    [SerializeField]
-    private float sinkSpeed = 2.5f;
-    [SerializeField]
-    private int scoreValue = 10;
-    [SerializeField]
-    private AudioClip deathClip;
+    //[SerializeField]
+    //private float sinkSpeed = 2.5f;
+    //[SerializeField]
+    //private int scoreValue = 10;
+    //[SerializeField]
+    //private AudioClip deathClip;
 
     //private Animator anim;
     //private AudioSource enemyAudio;
     //private ParticleSystem hitParticles;
     private BoxCollider boxCollider;
     private bool isDead;
-    private bool isSinking;
+    //private bool isSinking;
 
 	void Awake ()
     {
@@ -38,14 +38,14 @@ public class SandEnemyHealth : MonoBehaviour
         Debug.Log("Enemy health: " + currentHealth);
 
 		// If the enemy should be sinking...
-        if (isSinking)
-        {
+        //if (isSinking)
+        //{
             // ... move the enemy down by sinkSpeed / second
-            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
-        }
+            //transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
+        //}
 	}
 
-    public void TakeDamage(int amount, Vector3 hitPoint)
+    public void TakeDamage(int amount)
     {
         // If the enemy is dead...
         if (isDead)
@@ -81,6 +81,9 @@ public class SandEnemyHealth : MonoBehaviour
 
         // Turn collider into a trigger so shots can now pass through it
         boxCollider.isTrigger = true;
+
+        // Destroy this enemy
+        Destroy(this.gameObject);
 
         // Tell animator that enemy is dead
         //anim.SetTrigger("Dead");

@@ -95,7 +95,7 @@ public class SandCharShooting : MonoBehaviour
             // If hit object does have EnemyHelth, it takes damage
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damageAmount, shotHit.point);
+                enemyHealth.TakeDamage(damageAmount);
             }
 
             // Set end of line renderer at hit object
