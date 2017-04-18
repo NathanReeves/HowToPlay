@@ -94,7 +94,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 9
+  controlID: 93
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 14006, y: 14042}
   vertical: 1
-  controlID: 10
+  controlID: 94
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 11
+  controlID: 95
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_LastProjectPath: C:\Users\Nishc\Desktop\How to Play - VS\HowToPlayv.02
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 284.43784}
+    scrollPos: {x: 0, y: 282.9385}
     m_SelectedIDs: 38300000
     m_LastClickedID: 12344
     m_ExpandedIDs: 000000006e250000bc250000f22a00001c2b0000522d0000542d0000063000002a300000b23400008a35000048ec00004aec00004cec00004eec000000ca9a3bffffff7f
@@ -527,10 +527,10 @@ MonoBehaviour:
     width: 307
     height: 482
   m_TreeViewState:
-    scrollPos: {x: 0, y: 8024.2515}
-    m_SelectedIDs: 0c5d0000
-    m_LastClickedID: 23820
-    m_ExpandedIDs: 0cfaffffe2fbffff00000000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 3c91ffff
+    m_LastClickedID: 0
+    m_ExpandedIDs: e2fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -585,9 +585,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 266.34, y: -92.1, z: 1807.8899}
+    m_Target: {x: 35.868767, y: -46.337837, z: 583.4363}
     speed: 2
-    m_Value: {x: 266.34, y: -92.1, z: 1807.8899}
+    m_Value: {x: 35.868767, y: -46.337837, z: 583.4363}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -610,9 +610,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.017915616, y: 0.9811538, z: -0.11329714, w: -0.15549925}
+    m_Target: {x: -0.18315038, y: 0.11386709, z: -0.021403035, w: -0.97623366}
     speed: 2
-    m_Value: {x: -0.017915618, y: 0.98115385, z: -0.11329715, w: -0.15549926}
+    m_Value: {x: -0.18315037, y: 0.11386709, z: -0.021403035, w: -0.97623366}
   m_Size:
     m_Target: 9.621071
     speed: 2
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_LastLockedObject: {fileID: 0}
-  m_ViewIsLockedToObject: 1
+  m_ViewIsLockedToObject: 0
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
