@@ -12,9 +12,11 @@ public class ButtonDoorScript : MonoBehaviour
     private Vector3 startPosition = Vector3.zero;
     private bool closed = true;
     private bool open = false;
+    private buttonTouched script;
     // Use this for initialization
     void Start()
     {
+        script = button.GetComponent<buttonTouched>();
         startPosition = this.gameObject.transform.position;
         endPosition = endPosition + startPosition;
 
@@ -28,7 +30,7 @@ public class ButtonDoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        buttonOn = button.GetComponent<buttonTouched>().isSinking;
+        buttonOn = script.isOn;
         if (buttonOn)
         {
             timer += Time.deltaTime * speed;
@@ -46,19 +48,7 @@ public class ButtonDoorScript : MonoBehaviour
             
             
         }
-        else
-        {
-            if(open)
-            {
-                this.transform.position = Vector3.Lerp(endPosition, startPosition, timer);
-                if (timer > 1)
-                {
-                    closed = true;
-                    open = false;
-                    timer = 1;
-                }
-            }
-        }
+        
 
     }
     void OnDrawGizmos()

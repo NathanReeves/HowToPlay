@@ -121,7 +121,7 @@ public class SandCharController : MonoBehaviour
         // Use 3rd/1st person controls when in 3rd/1st person zone
         else if (moveZone == 5 | moveZone == 6)
         {
-            moveSpeed = 20;
+            moveSpeed = 40;
             jumpSpeed = 800;
             // Move player forward, back, left, right
             float moveForwardBack = Input.GetAxis("Vertical");
@@ -139,7 +139,7 @@ public class SandCharController : MonoBehaviour
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
             Move3rd(strafeLeftRight, moveForwardBack);
-            //Turn3rd(strafeLeftRight, moveForwardBack);
+            Turn3rd(strafeLeftRight, moveForwardBack);
         }
 
         // Check for jumping
@@ -191,8 +191,23 @@ public class SandCharController : MonoBehaviour
         Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
 
         Vector3 target = Input.GetAxis("Fire2") * cameraRight + Input.GetAxis("Fire1") * cameraForward * -1;
+        if (target.x == 0 && target.z == 0)
+        {
+            if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+                target = Last;
+            else
+            {
+                target = Input.GetAxis("Horizontal") * cameraRight + Input.GetAxis("Vertical") * cameraForward;
+                Last = target;
+            }
+        }
+        else
+        {
+            
+            Last = target;
+        }
         //target = target.normalized * moveSpeed * Time.deltaTime;
-        
+
         playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
         
     }
