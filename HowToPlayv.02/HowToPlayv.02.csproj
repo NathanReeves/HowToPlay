@@ -83,7 +83,7 @@
     <Compile Include="Assets\OurAssets\ButtonAssets\SandCharVairableJump.cs" />
     <Compile Include="Assets\OurAssets\ButtonAssets\buttonTouched.cs" />
     <Compile Include="Assets\OurAssets\ButtonAssets\leverTouch.cs" />
-    <Compile Include="Assets\OurAssets\Scripts\BoxMoveXConstraints.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\BoxMoveConstraints.cs" />
     <Compile Include="Assets\OurAssets\Scripts\CheckpointRespawner.cs" />
     <Compile Include="Assets\OurAssets\Scripts\ClockScript.cs" />
     <Compile Include="Assets\OurAssets\Scripts\EnemyControl.cs" />
