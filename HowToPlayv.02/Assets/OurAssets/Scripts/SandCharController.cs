@@ -88,7 +88,7 @@ public class SandCharController : MonoBehaviour
         else if (moveZone == 3)
         {
             //gameObject.transform.localScale = new Vector3(4,4,4);
-            moveSpeed = 30;
+            moveSpeed = 25;
             jumpSpeed = 500;
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
@@ -213,30 +213,9 @@ public class SandCharController : MonoBehaviour
     }
     private void MoveTwinStickClub(float horiz, float vert)
     {
-
-        Transform cameraTransform = twinCam.GetComponent<Camera>().transform;
-        // forward of the camera on the x-z plane
-        Vector3 cameraForward = twinCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
-        cameraForward.y = 0f;
-        cameraForward = cameraForward.normalized;
-
-        Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
-
-
-        // Set rotation constraints
-        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
-        // Set movement according to input
-        movement.Set(-vert, 0f, horiz);
-
-        // Normalize movement
-
-        var axis = transform.position;
-        Vector3 target = horiz * cameraRight + vert * cameraForward;
-        target = target.normalized * moveSpeed * Time.deltaTime;
-        lastLook = target;
         // Move player
-        playerRigidBody.MovePosition(transform.position + target);
+        //playerRigidBody.MovePosition(transform.position + target);
+        playerRigidBody.velocity = new Vector3(horiz*moveSpeed, playerRigidBody.velocity.y, vert*moveSpeed);
         //playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
     }
     private void Move3rd(float horiz, float vert)
