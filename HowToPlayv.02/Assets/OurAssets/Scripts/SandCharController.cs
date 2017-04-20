@@ -178,7 +178,7 @@ public class SandCharController : MonoBehaviour
     }
     private void TurnTwinStickClub()
     {
-        //playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         //Vector3 target = Input.GetAxis("Fire2")*Vector3.forward + Input.GetAxis("Fire1") * Vector3.right ;
         //target = target.normalized * moveSpeed * Time.deltaTime;
         //lastLook = target;
