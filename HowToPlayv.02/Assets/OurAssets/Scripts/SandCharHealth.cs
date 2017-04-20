@@ -44,7 +44,7 @@ public class SandCharHealth : MonoBehaviour
     void Update ()
     {
         Debug.Log("Player health: " + currentHealth);
-        Debug.Log("Player dead: " + isDead);
+        //Debug.Log("Player dead: " + isDead);
 
         // If the player has just been damaged...
         if (damaged)

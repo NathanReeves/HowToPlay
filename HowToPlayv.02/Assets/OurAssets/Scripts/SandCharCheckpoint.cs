@@ -17,7 +17,7 @@ public class SandCharCheckpoint : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Current spawnPoint: " + spawnPoint.position);
+        //Debug.Log("Current spawnPoint: " + spawnPoint.position);
     }
 
     public void RespawnToCheckpoint()

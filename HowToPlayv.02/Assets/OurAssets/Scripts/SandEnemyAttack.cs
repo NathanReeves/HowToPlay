@@ -5,7 +5,7 @@ using UnityEngine;
 public class SandEnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    private float attackCooldown = 0.5f;
+    private float attackCooldown = 1f;
     [SerializeField]
     private int attackDamage = 25;
 

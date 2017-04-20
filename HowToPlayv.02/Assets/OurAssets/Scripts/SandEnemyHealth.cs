@@ -35,7 +35,7 @@ public class SandEnemyHealth : MonoBehaviour
 	
 	void Update ()
     {
-        Debug.Log("Enemy health: " + currentHealth);
+        //Debug.Log("Enemy health: " + currentHealth);
 
 		// If the enemy should be sinking...
         //if (isSinking)

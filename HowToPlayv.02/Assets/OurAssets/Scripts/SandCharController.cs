@@ -56,7 +56,7 @@ public class SandCharController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("Player pos: " + this.transform.position);
+        //Debug.Log("Player pos: " + this.transform.position);
 
         // Use platformer controls when in platformer zone
         if (moveZone == 1 || moveZone == 2)
