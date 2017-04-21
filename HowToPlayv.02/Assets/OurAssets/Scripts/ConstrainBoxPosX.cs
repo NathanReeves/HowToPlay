@@ -7,24 +7,22 @@ public class ConstrainBoxPosX : MonoBehaviour
     private Rigidbody boxRigid;
     private Vector3 boxPos;
     [SerializeField]
-    private Vector3 maxBound;
-    [SerializeField]
     private Vector3 minBound;
+    [SerializeField]
+    private Vector3 maxBound;
 
     private void Awake()
     {
         boxRigid = GetComponent<Rigidbody>();
         boxPos = boxRigid.position;
+        minBound = new Vector3(330, 0, 0);
+        maxBound = new Vector3(365, 0, 0);
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         boxPos.x = transform.position.x;
-
-        Debug.Log("Box pos z: " + boxPos);
-        Debug.Log("Max pos z: " + maxBound);
-        Debug.Log("Min pos z: " + minBound);
 
         if (boxPos.x > maxBound.x)
         {

@@ -25,18 +25,6 @@ public class SandEnemyAttack : MonoBehaviour
         //anim = GetComponent<Animator>();
 	}
 
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        // If enemy is colliding with player...
-        if (other.gameObject == player)
-        {
-            // ... player is in attack range
-            playerInAttackRange = true;
-        }
-    }
-    */
-
     private void OnCollisionEnter(Collision collision)
     {
         // If enemy is colliding with player...
@@ -46,18 +34,6 @@ public class SandEnemyAttack : MonoBehaviour
             playerInAttackRange = true;
         }
     }
-
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        // If enemy is moving away from player...
-        if (other.gameObject == player)
-        {
-            // ... player is no longer in attack range
-            playerInAttackRange = false;
-        }
-    }
-    */
 
     private void OnCollisionExit(Collision collision)
     {

@@ -93,6 +93,7 @@
     <Compile Include="Assets\OurAssets\Scripts\LaserOff.cs" />
     <Compile Include="Assets\OurAssets\Scripts\MovingPlatform.cs" />
     <Compile Include="Assets\OurAssets\Scripts\MovingPlatform2.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\MusicManager.cs" />
     <Compile Include="Assets\OurAssets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\OurAssets\Scripts\Rotator.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandCharCheckpoint.cs" />
@@ -108,6 +109,8 @@
     <Compile Include="Assets\OurAssets\Scripts\SandFixedCamController.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SandFollowCamController.cs" />
     <Compile Include="Assets\OurAssets\Scripts\SpikeKillPlayer.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\StopMusicTrigger.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\SwitchMusicTrigger.cs" />
     <Compile Include="Assets\OurAssets\Scripts\ThirdPersonOrbitCam.cs" />
     <Compile Include="Assets\OurAssets\Scripts\WireOn.cs" />
     <Compile Include="Assets\OurAssets\Scripts\WireOnCombination.cs" />

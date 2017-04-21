@@ -7,36 +7,54 @@ public class SandEnemyMoveFollow : MonoBehaviour
 {
     // References
     [SerializeField]
-    private Transform player;
+    private GameObject player;
+    private Transform playerPos;
     [SerializeField]
     private SandCharHealth playerHealth;
     [SerializeField]
     private SandEnemyHealth enemyHealth;
     [SerializeField]
     private NavMeshAgent nav;
+    private bool triggered;
 
 	void Awake ()
     {
         // Setup references
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerHealth = player.GetComponent<SandCharHealth>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerPos = player.transform;
+        playerHealth = playerPos.GetComponent<SandCharHealth>();
         enemyHealth = GetComponent<SandEnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
+        triggered = false;
 	}
-	
-	void Update ()
+
+    private void OnTriggerEnter(Collision collision)
     {
-		// If player and enemy both have health...
-        if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        // If player collides with enemy trigger...
+        if (collision.gameObject == player)
         {
-            // ... set enemy's destination as the player's position
-            nav.SetDestination(player.position);
+            // ... trigger this enemy to follow player
+            triggered = true;
         }
-        // Otherwise...
-        else
+    }
+
+    void Update ()
+    {
+        if (triggered)
         {
-            // ... disable nav mesh agent so enemy stop moving
-            nav.enabled = false;
+            // If player and enemy both have health...
+            if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+            {
+                // ... set enemy's destination as the player's position
+                nav.SetDestination(playerPos.position);
+            }
+            // Otherwise...
+            else
+            {
+                // ... disable nav mesh agent so enemy stop moving
+                nav.enabled = false;
+            }
         }
+
 	}
 }
