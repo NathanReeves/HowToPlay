@@ -63,7 +63,6 @@ C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\b
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.dll
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.HoloLens.dll
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.Networking.dll
-C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.UI.dll
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.VR.dll
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\Mono.Cecil.dll
@@ -78,10 +77,13 @@ C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\b
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEditor.xml
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.UI.xml
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.Networking.xml
-C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.Analytics.xml
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.VR.xml
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\obj\Debug\Assembly-CSharp.dll
 C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\obj\Debug\Assembly-CSharp.pdb
+C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\nunit.framework.dll
+C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.TestRunner.dll
+C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\UnityEngine.TestRunner.xml
+C:\Users\mrswi\OneDrive\Documents\GitHub\How2play\HowToPlay\HowToPlayv.02\Temp\bin\Debug\nunit.framework.xml

@@ -15,9 +15,7 @@ public class MusicManager : MonoBehaviour {
 	}
 	public void StopBGM()
 	{
-		for (float i = bgm.volume; i >= 0; i -= .00001f) {
-			bgm.volume -= .00001f;
-		}
+		
 		bgm.Stop ();
 	}
 	public void ChangeBGM(AudioClip music)
