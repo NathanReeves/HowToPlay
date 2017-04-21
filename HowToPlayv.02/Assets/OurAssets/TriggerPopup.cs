@@ -8,6 +8,7 @@ public class TriggerPopup : MonoBehaviour {
 	private changeText changeTextScriptReference;
 	public int triggerNumber;
 	public int triggerImageNumber;
+	public float appearTime;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,7 @@ public class TriggerPopup : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other){
 
-		changeTextScriptReference.isTriggered (triggerNumber, triggerImageNumber);
+		changeTextScriptReference.isTriggered (triggerNumber, triggerImageNumber, appearTime);
 
 	}
 

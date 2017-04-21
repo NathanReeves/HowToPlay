@@ -38,12 +38,11 @@ public class changeText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		Text[] textArr = GetComponentsInChildren<Text> ();
 
 		justText = textArr [0];
 		textPartOfImage = textArr [1];
-
-
 
 		canv = GetComponentInChildren<Canvas> ();
 
@@ -60,8 +59,9 @@ public class changeText : MonoBehaviour {
 
 		//Image[] obj = ControllerLeftAnalogImage.GetComponentInParent<Image>()
 
-
-
+		ControllerLeftAnalogImage.gameObject.SetActive (false);
+		ControllerJumpImage.gameObject.SetActive (false);
+		ControllerRightAnalogImage.gameObject.SetActive (false);
 
 		//startOfGame = true;
 		canv.gameObject.SetActive(false);
@@ -74,13 +74,14 @@ public class changeText : MonoBehaviour {
 		messages = new string[10];
 		//gameObject.SetActive (true);
 		messages [0] = "Welcome to How To Play: The Game!";
-		messages [1] = "Move the stick to move right or left!";
+		messages [1] = "Press the A button to jump!";
 		messages [2] = "Move the stick to the left to move left!";
 		messages [3] = "Now you can move the left stick to move in any direction!";
 		messages [4] = "Move the right stick to look around without moving!";
+		messages [5] = "Move the stick to the right to move right!";
 
 		//run the trigger method right at the beginning for the intro pop up
-		isTriggered(0, -1);
+		//isTriggered(0, -1, 2.5f);
 
 	}
 	
@@ -117,7 +118,7 @@ public class changeText : MonoBehaviour {
 
 
 	//method should be ran when a trigger is encountered in the game world causing a text to pop up.
-	public void isTriggered(int messageNumber, int numOfImage){
+	public void isTriggered(int messageNumber, int numOfImage, float appearTime){
 		canv.gameObject.SetActive (true);
 		if (numOfImage == -1) {
 			JustTextPanel.gameObject.SetActive (true);
@@ -140,6 +141,7 @@ public class changeText : MonoBehaviour {
 			textPartOfImage.text = messages [messageNumber];
 		}
 
+		shutOffTime = appearTime;
 		nowCountingTime = true;
 	}
 		
