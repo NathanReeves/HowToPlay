@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 95448665768006174}
   - component: {fileID: 114398515026087206}
   - component: {fileID: 114907447873546780}
-  - component: {fileID: 135029062327786848}
   - component: {fileID: 65022243414726348}
   - component: {fileID: 195428158821271698}
   - component: {fileID: 114964491298813800}
@@ -97,8 +96,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.33174676, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Size: {x: 0.33174676, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!95 &95448665768006174
 Animator:
   serializedVersion: 3
@@ -153,22 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa08907f17b86d408e239d7a4462de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 0}
-  nav: {fileID: 0}
-  patrolZSize: 10
-  patrolXSize: 0
---- !u!135 &135029062327786848
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1079248083886704}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8
-  m_Center: {x: 0, y: 0.34983784, z: 0}
+  enemyHealth: {fileID: 114907447873546780}
+  nav: {fileID: 195428158821271698}
+  patrolZSize: 0
+  patrolXSize: 15
 --- !u!195 &195428158821271698
 NavMeshAgent:
   m_ObjectHideFlags: 1

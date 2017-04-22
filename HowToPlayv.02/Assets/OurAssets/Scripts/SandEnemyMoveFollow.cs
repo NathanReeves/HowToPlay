@@ -28,18 +28,20 @@ public class SandEnemyMoveFollow : MonoBehaviour
         triggered = false;
 	}
 
-    private void OnTriggerEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        // If player collides with enemy trigger...
-        if (collision.gameObject == player)
+        // If player collides with enemy "aggro" trigger...
+        if (other.gameObject == player)
         {
-            // ... trigger this enemy to follow player
+            // ... set enemy to follow player
             triggered = true;
         }
     }
 
     void Update ()
     {
+        //Debug.Log("Triggered: " + triggered);
+
         if (triggered)
         {
             // If player and enemy both have health...

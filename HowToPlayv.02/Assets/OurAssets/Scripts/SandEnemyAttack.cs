@@ -8,11 +8,13 @@ public class SandEnemyAttack : MonoBehaviour
     private float attackCooldown = 1f;
     [SerializeField]
     private int attackDamage = 25;
+    [SerializeField]
+    private int hitByPlayerDamage = 100;
 
     //private Animator anim;
     private GameObject player;
     private SandCharHealth charHealth;
-    //private SandEnemyHealth enemyHealth;
+    private SandEnemyHealth enemyHealth;
     private bool playerInAttackRange;
     private float attackTimer;
 
@@ -21,7 +23,7 @@ public class SandEnemyAttack : MonoBehaviour
         // Setup references
         player = GameObject.FindGameObjectWithTag("Player");
         charHealth = player.GetComponent<SandCharHealth>();
-        //enemyHealth = GetComponent<SandEnemyHealth>();
+        enemyHealth = GetComponent<SandEnemyHealth>();
         //anim = GetComponent<Animator>();
 	}
 
@@ -37,6 +39,7 @@ public class SandEnemyAttack : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        // If enemy is no longer colliding with player...
         if (collision.gameObject == player)
         {
             // ... player is no longer in attack range

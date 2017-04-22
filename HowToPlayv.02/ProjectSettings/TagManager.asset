@@ -25,6 +25,7 @@ TagManager:
   - JustTextPanel
   - TextAndImage
   - ControllerLeftAnalogImage
+  - Melee
   layers:
   - Default
   - TransparentFX

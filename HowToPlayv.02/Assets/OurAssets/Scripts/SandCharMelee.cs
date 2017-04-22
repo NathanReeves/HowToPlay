@@ -9,8 +9,6 @@ public class SandCharMelee : MonoBehaviour
     private int damageAmount = 100;
     [SerializeField]
     private float attackCooldown = 0.5f;
-    [SerializeField]
-    private float attackRange = 5f;
 
     // Private fields
     private float timer;
@@ -34,7 +32,7 @@ public class SandCharMelee : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(enemyHealth);
+        Debug.Log("Hitable: " + hitable);
 
         // Increase timer since Update was called
         timer += Time.deltaTime;
@@ -56,6 +54,30 @@ public class SandCharMelee : MonoBehaviour
         */
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        // If colliding with an enemy hitbox...
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // ... set hitable to true
+            hitable = true;
+
+            // Also make note of enemy being hit (so we know who's health to decrease)
+            enemyHealth = collision.gameObject.GetComponentInParent<SandEnemyHealth>();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // If leaving an enemy hitbox...
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // ... set hitable to false
+            hitable = false;
+        }
+    }
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         // If colliding with an enemy hitbox...
@@ -78,8 +100,9 @@ public class SandCharMelee : MonoBehaviour
             hitable = false;
         }
     }
+    */
 
-    void Attack()
+    public void Attack()
     {
         // Reset timer
         timer = 0f;
