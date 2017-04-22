@@ -53,6 +53,8 @@
      <Compile Include="Assets\OurAssets\ButtonAssets\leverTouch.cs" />
      <Compile Include="Assets\OurAssets\Scripts\CheckpointRespawner.cs" />
      <Compile Include="Assets\OurAssets\Scripts\ClockScript.cs" />
+     <Compile Include="Assets\OurAssets\Scripts\ConstrainBoxPosX.cs" />
+     <Compile Include="Assets\OurAssets\Scripts\ConstrainBoxPosZ.cs" />
      <Compile Include="Assets\OurAssets\Scripts\EnemyControl.cs" />
      <Compile Include="Assets\OurAssets\Scripts\EnemyDie.cs" />
      <Compile Include="Assets\OurAssets\Scripts\EnemyKill.cs" />
@@ -111,6 +113,8 @@
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerHealth.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerShooting.cs" />
+     <Compile Include="Assets\buttonDoorPlatformer.cs" />
+     <Compile Include="Assets\buttonTouchedPlatformer.cs" />
      <Compile Include="Assets\door3.cs" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
