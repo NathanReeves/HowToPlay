@@ -145,6 +145,8 @@
     <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerShooting.cs" />
+    <Compile Include="Assets\buttonDoorPlatformer.cs" />
+    <Compile Include="Assets\buttonTouchedPlatformer.cs" />
     <Compile Include="Assets\door3.cs" />
   </ItemGroup>
   <ItemGroup>
