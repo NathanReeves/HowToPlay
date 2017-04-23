@@ -8,8 +8,6 @@ public class SandEnemyAttack : MonoBehaviour
     private float attackCooldown = 1f;
     [SerializeField]
     private int attackDamage = 25;
-    [SerializeField]
-    private int hitByPlayerDamage = 100;
 
     //private Animator anim;
     private GameObject player;

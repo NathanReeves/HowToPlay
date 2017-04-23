@@ -54,34 +54,10 @@ public class SandCharMelee : MonoBehaviour
         */
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        // If colliding with an enemy hitbox...
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            // ... set hitable to true
-            hitable = true;
-
-            // Also make note of enemy being hit (so we know who's health to decrease)
-            enemyHealth = collision.gameObject.GetComponentInParent<SandEnemyHealth>();
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        // If leaving an enemy hitbox...
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            // ... set hitable to false
-            hitable = false;
-        }
-    }
-
-    /*
     private void OnTriggerEnter(Collider other)
     {
         // If colliding with an enemy hitbox...
-        if (other.CompareTag("Enemy"))
+        if (other.GetType() == typeof(BoxCollider) && other.CompareTag("Enemy"))
         {
             // ... set hitable to true
             hitable = true;
@@ -100,7 +76,6 @@ public class SandCharMelee : MonoBehaviour
             hitable = false;
         }
     }
-    */
 
     public void Attack()
     {

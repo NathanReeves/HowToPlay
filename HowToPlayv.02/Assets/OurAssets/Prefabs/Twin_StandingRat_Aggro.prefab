@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 65466404268001470}
   - component: {fileID: 195636169272752816}
   - component: {fileID: 114662559407431806}
+  - component: {fileID: 65635146111686082}
   m_Layer: 9
   m_Name: Twin_StandingRat_Aggro
   m_TagString: Enemy
@@ -99,6 +100,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.33174676, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!65 &65635146111686082
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701572035693514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!95 &95875358013861960
 Animator:
   serializedVersion: 3
@@ -129,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 0.5
   attackDamage: 25
+  hitByPlayerDamage: 100
 --- !u!114 &114439757967154432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,7 +181,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 6
   m_Center: {x: 0, y: 0.34983784, z: 0}
 --- !u!195 &195636169272752816
 NavMeshAgent:

@@ -31,7 +31,7 @@ public class SandEnemyMoveFollow : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If player collides with enemy "aggro" trigger...
-        if (other.gameObject == player)
+        if (other.GetType() == typeof(CapsuleCollider) && other.gameObject == player)
         {
             // ... set enemy to follow player
             triggered = true;
@@ -40,7 +40,7 @@ public class SandEnemyMoveFollow : MonoBehaviour
 
     void Update ()
     {
-        //Debug.Log("Triggered: " + triggered);
+        Debug.Log("Triggered: " + triggered);
 
         if (triggered)
         {
