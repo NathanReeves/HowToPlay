@@ -57,7 +57,6 @@ public class SandCharController : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Debug.Log("Player pos: " + this.transform.position);
 
         // Use platformer controls when in platformer zone
         if (moveZone == 1 || moveZone == 2)
@@ -103,12 +102,17 @@ public class SandCharController : MonoBehaviour
                 if (forward)
                     turn = true;
                 forward = false;
-
+                
             }
             else
             {
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
+            if (Input.GetAxis("Fire3") != 0)
+            {
+                GetComponent<Animator>().SetTrigger("meleet");
+            }
+
 
         }
         // Use twin stick shooting controls when in twin stick shoot zone
