@@ -47,8 +47,8 @@ public class buttonDoorPlatformer : MonoBehaviour {
 
 		}
 		else {
-			this.gameObject.transform.position = startPosition;
-			closed = true;
+			//this.gameObject.transform.position = startPosition;
+			//closed = true;
 		}
 
 
