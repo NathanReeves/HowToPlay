@@ -30,8 +30,8 @@ public class ButtonDoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        buttonOn = script.isOn;
-        if (buttonOn)
+        //buttonOn = script.isOn;
+        if (script.isOn)
         {
             timer += Time.deltaTime * speed;
             if (closed)
