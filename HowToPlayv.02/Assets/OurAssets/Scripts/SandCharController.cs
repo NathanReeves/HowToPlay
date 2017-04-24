@@ -23,6 +23,7 @@ public class SandCharController : MonoBehaviour
     private Vector3 lastLook;
     private Vector3 Last;
     private Rigidbody playerRigidBody;
+    public GameObject gun;
     private int moveZone = 1;
     private bool isGrounded;
     bool turn;
@@ -61,6 +62,7 @@ public class SandCharController : MonoBehaviour
         // Use platformer controls when in platformer zone
         if (moveZone == 1 || moveZone == 2)
         {
+           
             float moveHorizontal = Input.GetAxis("Horizontal");
             if (moveHorizontal < 0)
             {
@@ -87,6 +89,7 @@ public class SandCharController : MonoBehaviour
         // Use twin stick club controls when in twin stick club zone
         else if (moveZone == 3)
         {
+            
             //gameObject.transform.localScale = new Vector3(4,4,4);
             moveSpeed = 25;
             jumpSpeed = 500;
@@ -347,9 +350,7 @@ public class SandCharController : MonoBehaviour
 
             // Show sword and enable melee attack
             this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(3).gameObject.SetActive(true);
+            //this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
             // Switch to twin stick camera
             platCam.enabled = false;
@@ -364,14 +365,10 @@ public class SandCharController : MonoBehaviour
             moveZone = 4;
 
             // Hide melee weapon and disable melee attack
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
-            this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
-            this.gameObject.transform.GetChild(3).gameObject.SetActive(false);
 
             // Show gun and enable shooting attack
-            this.gameObject.transform.GetChild(4).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(5).gameObject.SetActive(true);
+            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+           
         }
         if (other.gameObject.CompareTag("Enter3rdPerson"))
         {
@@ -397,6 +394,12 @@ public class SandCharController : MonoBehaviour
             other.gameObject.SetActive(false);
             keyCount++;
             keys.text = "Keys: " + keyCount.ToString();
+        }
+        if(other.gameObject.CompareTag("Gun"))
+        {
+            gun.SetActive(true);
+            GetComponent<Animator>().SetBool("hasGun", true);
+            other.gameObject.SetActive(false);
         }
     }
     void OnCollisionEnter(Collision collision)

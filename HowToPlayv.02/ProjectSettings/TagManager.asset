@@ -26,6 +26,7 @@ TagManager:
   - TextAndImage
   - ControllerLeftAnalogImage
   - Melee
+  - Gun
   layers:
   - Default
   - TransparentFX
