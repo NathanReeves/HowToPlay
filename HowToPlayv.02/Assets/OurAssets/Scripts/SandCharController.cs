@@ -21,6 +21,7 @@ public class SandCharController : MonoBehaviour
     private GameObject attackPoint;
     private int keyCount;
     private int gunCount;
+    private bool melee;
     private Vector3 movement;
     private Vector3 lastLook;
     private Vector3 Last;
@@ -114,7 +115,7 @@ public class SandCharController : MonoBehaviour
             {
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
-            if (Input.GetAxis("Fire3") != 0)
+            if (Input.GetAxis("Fire3") != 0 && melee)
             {
                 GetComponent<Animator>().SetTrigger("meleet");
             }
@@ -352,7 +353,6 @@ public class SandCharController : MonoBehaviour
         {
             // Switch to twin stick controls (only weapon swinging)
             moveZone = 3;
-
             // Show sword and enable melee attack
             //this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             //this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
@@ -368,6 +368,7 @@ public class SandCharController : MonoBehaviour
         {
             // Switch to twin stick shooter controls (add shooting)
             //moveZone = 4;
+            melee = false;
             attackPoint.GetComponent<SandCharMelee>().enabled = false;
             attackPoint.GetComponent<SandCharShooting>().enabled = true;
 
@@ -409,6 +410,7 @@ public class SandCharController : MonoBehaviour
         if (other.gameObject.CompareTag("Gun"))
         {
             gun.SetActive(true);
+            melee = true;
             GetComponent<Animator>().SetBool("hasGun", true);
             other.gameObject.SetActive(false);
         }

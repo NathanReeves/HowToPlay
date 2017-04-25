@@ -43,7 +43,11 @@ public class SandCharMelee : MonoBehaviour
             // ... attack!
             Attack();
         }
-
+        if (Input.GetAxis("Fire3") != 0 && timer >= attackCooldown)
+        {
+            // ... attack!
+            Attack();
+        }
         /*
         // If timer has exceeded 
         if (timer >= shotCooldown * effectsDisplayTime)

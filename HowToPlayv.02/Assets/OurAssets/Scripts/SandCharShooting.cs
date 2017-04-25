@@ -48,7 +48,10 @@ public class SandCharShooting : MonoBehaviour
             // ... shoot!
             Shoot();
         }
-
+        if(Input.GetAxis("Fire3") != 0 && timer >= shotCooldown)
+        {
+            Shoot();
+        }
         // If timer is exceeded...
         if (timer >= shotCooldown * effectsDisplayTime)
         {
