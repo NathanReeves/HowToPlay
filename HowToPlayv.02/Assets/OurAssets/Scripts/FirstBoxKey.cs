@@ -5,36 +5,40 @@ using UnityEngine;
 public class FirstBoxKey : MonoBehaviour
 {
     [SerializeField]
-    GameObject button1;
+    MeshRenderer rend;
     [SerializeField]
-    GameObject button2;
+    BoxCollider collid;
 
-    bool button1Down;
-    bool button2Down;
-    MeshRenderer renderer;
-    BoxCollider collider;
+    GameObject button1;
+    GameObject button2;
+    bool button1Status;
+    bool button2Status;
 
 	// Use this for initialization
-	void Awake ()
+	void Start ()
     {
-        renderer = gameObject.GetComponent<MeshRenderer>();
-        collider = gameObject.GetComponent<BoxCollider>();
-        renderer.enabled = false;
-        collider.enabled = false;
-        button1Down = button1.GetComponent<buttonTouchedPlatformer>().isOn;
-        button2Down = button1.GetComponent<buttonTouchedPlatformer>().isOn;
+        rend = gameObject.GetComponent<MeshRenderer>();
+        collid = gameObject.GetComponent<BoxCollider>();
+        rend.enabled = false;
+        collid.enabled = false;
+        button1 = GameObject.FindGameObjectWithTag("Button1");
+        button2 = GameObject.FindGameObjectWithTag("Button2");
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("B1 Down: " + button1Down);
-        Debug.Log("B2 Down: " + button2Down);
+        button1Status = button1.GetComponent<buttonTouchedPlatformer>().isOn;
+        button2Status = button2.GetComponent<buttonTouchedPlatformer>().isOn;
 
-		if (button1Down && button1Down)
+        Debug.Log("B1 Down: " + button1Status);
+        Debug.Log("B2 Down: " + button2Status);
+
+		if (button1Status && button2Status)
         {
-            renderer.enabled = false;
-            collider.enabled = false;
+            rend.enabled = true;
+            collid.enabled = true;
+            gameObject.GetComponent<FirstBoxKey>().enabled = false;
         }
 	}
 }

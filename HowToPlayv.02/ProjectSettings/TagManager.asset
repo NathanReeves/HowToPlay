@@ -29,6 +29,8 @@ TagManager:
   - Gun
   - GunDoor
   - AttackPoint
+  - Button1
+  - Button2
   layers:
   - Default
   - TransparentFX

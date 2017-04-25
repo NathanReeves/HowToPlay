@@ -15,6 +15,8 @@ public class SandEnemyMoveFollow : MonoBehaviour
     private SandEnemyHealth enemyHealth;
     [SerializeField]
     private NavMeshAgent nav;
+    [SerializeField]
+    private float speedEn = 15f;
     private bool triggered;
 
 	void Awake ()
@@ -25,6 +27,7 @@ public class SandEnemyMoveFollow : MonoBehaviour
         playerHealth = playerPos.GetComponent<SandCharHealth>();
         enemyHealth = GetComponent<SandEnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
+        nav.speed = speedEn;
         triggered = false;
 	}
 
