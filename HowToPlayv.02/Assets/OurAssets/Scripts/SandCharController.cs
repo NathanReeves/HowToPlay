@@ -18,13 +18,15 @@ public class SandCharController : MonoBehaviour
     [SerializeField]
     private Camera firstCam;
 
+    private GameObject attackPoint;
     private int keyCount;
+    private int gunCount;
     private Vector3 movement;
     private Vector3 lastLook;
     private Vector3 Last;
     private Rigidbody playerRigidBody;
     public GameObject gun;
-    private int moveZone = 1;
+    public int moveZone = 1;
     private bool isGrounded;
     bool turn;
     bool forward;
@@ -35,7 +37,11 @@ public class SandCharController : MonoBehaviour
 
     void Awake()
     {
+        attackPoint = GameObject.FindGameObjectWithTag("AttackPoint");
+        attackPoint.GetComponent<SandCharMelee>().enabled = true;
+        attackPoint.GetComponent<SandCharShooting>().enabled = false;
         keyCount = 0;
+        gunCount = 0;
         keys.text = "Keys: " + keyCount.ToString();
         floorMask = LayerMask.GetMask("Floor");
         playerRigidBody = GetComponent<Rigidbody>();
@@ -115,15 +121,10 @@ public class SandCharController : MonoBehaviour
 
 
         }
-        // Use twin stick shooting controls when in twin stick shoot zone
+        // Add shooting mechanics
         else if (moveZone == 4)
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
-
-            //twinCam.GetComponent<Camera>().transform.forward.y  
-            MoveTwinStickShoot(moveHorizontal, moveVertical);
-            TurnTwinStickShoot();
+            
         }
         // Use 3rd/1st person controls when in 3rd/1st person zone
         else if (moveZone == 5 | moveZone == 6)
@@ -353,7 +354,7 @@ public class SandCharController : MonoBehaviour
             moveZone = 3;
 
             // Show sword and enable melee attack
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            //this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             //this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
             // Switch to twin stick camera
@@ -366,13 +367,15 @@ public class SandCharController : MonoBehaviour
         if (other.gameObject.CompareTag("EnterTwinStickShoot"))
         {
             // Switch to twin stick shooter controls (add shooting)
-            moveZone = 4;
+            //moveZone = 4;
+            attackPoint.GetComponent<SandCharMelee>().enabled = false;
+            attackPoint.GetComponent<SandCharShooting>().enabled = true;
 
             // Hide melee weapon and disable melee attack
 
             // Show gun and enable shooting attack
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-           
+            //this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+
         }
         if (other.gameObject.CompareTag("Enter3rdPerson"))
         {
@@ -399,7 +402,11 @@ public class SandCharController : MonoBehaviour
             keyCount++;
             keys.text = "Keys: " + keyCount.ToString();
         }
-        if(other.gameObject.CompareTag("Gun"))
+        if (other.gameObject.CompareTag("Gun"))
+        {
+            gunCount++;
+        }
+        if (other.gameObject.CompareTag("Gun"))
         {
             gun.SetActive(true);
             GetComponent<Animator>().SetBool("hasGun", true);
@@ -432,7 +439,10 @@ public class SandCharController : MonoBehaviour
             collision.gameObject.SetActive(false);
             keyCount--;
             keys.text = "Keys: " + keyCount.ToString();
-
+        }
+        if (collision.gameObject.CompareTag("GunDoor") && gunCount > 0)
+        {
+            collision.gameObject.SetActive(false);
         }
     }
 

@@ -17,7 +17,7 @@ public class buttonTouchedPlatformer : MonoBehaviour {
 	private float startYCoordinate;
 	private float currentYCoordinate;
 
-	private bool cubeIsIn = false;
+	public bool cubeIsIn = false;
 	private bool playerIsIn = false;
 
 	// Use this for initialization

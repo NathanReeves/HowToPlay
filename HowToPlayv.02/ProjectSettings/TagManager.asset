@@ -27,6 +27,8 @@ TagManager:
   - ControllerLeftAnalogImage
   - Melee
   - Gun
+  - GunDoor
+  - AttackPoint
   layers:
   - Default
   - TransparentFX

@@ -64,6 +64,8 @@ public class SandCharMelee : MonoBehaviour
 
             // Also make note of enemy being hit (so we know who's health to decrease)
             enemyHealth = other.GetComponentInParent<SandEnemyHealth>();
+
+            //Debug.Log(enemyHealth.currentHealth);
         }
     }
 
@@ -92,6 +94,8 @@ public class SandCharMelee : MonoBehaviour
         // If enemy is hitable and has health...
         if (hitable && enemyHealth != null)
         {
+            //Debug.Log("Attacking");
+
             // ... attack it and subtract damageAmount from their health
             enemyHealth.TakeDamage(damageAmount);
         }

@@ -76,12 +76,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ButtonDoorScript.cs" />
@@ -96,6 +90,7 @@
     <Compile Include="Assets\OurAssets\Scripts\EnemyControl.cs" />
     <Compile Include="Assets\OurAssets\Scripts\EnemyDie.cs" />
     <Compile Include="Assets\OurAssets\Scripts\EnemyKill.cs" />
+    <Compile Include="Assets\OurAssets\Scripts\FirstBoxKey.cs" />
     <Compile Include="Assets\OurAssets\Scripts\LaserOff.cs" />
     <Compile Include="Assets\OurAssets\Scripts\MovingPlatform.cs" />
     <Compile Include="Assets\OurAssets\Scripts\MovingPlatform2.cs" />

@@ -40,7 +40,7 @@ public class SandEnemyMoveFollow : MonoBehaviour
 
     void Update ()
     {
-        Debug.Log("Triggered: " + triggered);
+        //Debug.Log("Triggered: " + triggered);
 
         if (triggered)
         {
