@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ButtonDoorScript.cs" />
+     <Compile Include="Assets\Credits.cs" />
      <Compile Include="Assets\MovingBox.cs" />
      <Compile Include="Assets\OurAssets\ButtonAssets\SandCharVairableJump.cs" />
      <Compile Include="Assets\OurAssets\ButtonAssets\buttonTouched.cs" />
@@ -58,10 +59,12 @@
      <Compile Include="Assets\OurAssets\Scripts\EnemyControl.cs" />
      <Compile Include="Assets\OurAssets\Scripts\EnemyDie.cs" />
      <Compile Include="Assets\OurAssets\Scripts\EnemyKill.cs" />
+     <Compile Include="Assets\OurAssets\Scripts\FirstBoxKey.cs" />
      <Compile Include="Assets\OurAssets\Scripts\LaserOff.cs" />
      <Compile Include="Assets\OurAssets\Scripts\MovingPlatform.cs" />
      <Compile Include="Assets\OurAssets\Scripts\MovingPlatform2.cs" />
      <Compile Include="Assets\OurAssets\Scripts\MusicManager.cs" />
+     <Compile Include="Assets\OurAssets\Scripts\PickupAmmo.cs" />
      <Compile Include="Assets\OurAssets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\OurAssets\Scripts\Rotator.cs" />
      <Compile Include="Assets\OurAssets\Scripts\SandCharCheckpoint.cs" />
@@ -117,6 +120,7 @@
      <Compile Include="Assets\buttonTouchedPlatformer.cs" />
      <Compile Include="Assets\door3.cs" />
      <Compile Include="Assets\slowbuttondoor.cs" />
+     <Compile Include="Assets\triggerDoor.cs" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
