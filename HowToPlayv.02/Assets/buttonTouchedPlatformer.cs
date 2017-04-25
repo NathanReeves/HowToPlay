@@ -17,6 +17,9 @@ public class buttonTouchedPlatformer : MonoBehaviour {
 	private float startYCoordinate;
 	private float currentYCoordinate;
 
+	private bool cubeIsIn = false;
+	private bool playerIsIn = false;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -45,14 +48,30 @@ public class buttonTouchedPlatformer : MonoBehaviour {
 		// rising ();
 		// }
 		//
+
+		//if (playerIsIn || cubeIsIn) {
+		//	cube.GetComponent<MeshRenderer> ().material = red;
+		//}
+			//playerIsIn = false;
+			//cubeIsIn = false;
+
+
 	}
 
-	    void OnTriggerEnter(Collider other)
-	    {
-	 	//Debug.Log ("COLLISION");
-	 	//isSinking = true;
-			cube.GetComponent<MeshRenderer>().material = red;
-	    }
+	void OnTriggerEnter(Collider other)
+	{
+		//Debug.Log ("COLLISION");
+		//isSinking = true;
+		cube.GetComponent<MeshRenderer> ().material = red;
+		if (other.gameObject.tag == "Ground") {
+			cubeIsIn = true;
+		}
+
+		if (other.gameObject.tag == "Player") {
+			playerIsIn = true;
+		}
+
+	}
 
 	void OnTriggerStay(Collider other)
 	{
@@ -62,6 +81,9 @@ public class buttonTouchedPlatformer : MonoBehaviour {
 		//{
 		//	cube.GetComponent<MeshRenderer>().material = red;
 		//}
+
+
+
 	}
 	//void OnTriggerEnter(Collider other)
 	//{
@@ -88,7 +110,18 @@ public class buttonTouchedPlatformer : MonoBehaviour {
 		defaultState = false;
 		isSinking = false;
 		isOn = false;
-		cube.GetComponent<MeshRenderer>().material = dfault;
+
+		if (other.gameObject.tag == "Player") {
+			playerIsIn = false;
+		}
+		if (other.gameObject.tag == "Ground") {
+			cubeIsIn = false;
+		}
+
+		if (!cubeIsIn || !playerIsIn) {
+			cube.GetComponent<MeshRenderer> ().material = dfault;
+		}
+
 	}
 
 	void sinking()

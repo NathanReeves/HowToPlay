@@ -116,6 +116,7 @@
      <Compile Include="Assets\buttonDoorPlatformer.cs" />
      <Compile Include="Assets\buttonTouchedPlatformer.cs" />
      <Compile Include="Assets\door3.cs" />
+     <Compile Include="Assets\slowbuttondoor.cs" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
      <None Include="Assets\_CompletedAssets\SampleAssets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
