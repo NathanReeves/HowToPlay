@@ -382,7 +382,7 @@ public class SandCharController : MonoBehaviour
         {
             // Switch to 3rd person / 1st person controls
             moveZone = 5;
-
+            GetComponent<Animator>().SetBool("hasGun", false);
             // Switch to 3rd person camera
             platCam.enabled = false;
             twinCam.enabled = false;
