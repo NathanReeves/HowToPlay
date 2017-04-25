@@ -8,7 +8,8 @@
       <File FileName="Assets\ButtonDoorScript.cs" Line="1" Column="1" />
       <File FileName="Assets\buttonDoorPlatformer.cs" Line="1" Column="1" />
       <File FileName="Assets\OurAssets\ButtonAssets\buttonTouched.cs" Line="1" Column="1" />
-      <File FileName="Assets\buttonTouchedPlatformer.cs" Line="134" Column="34" />
+      <File FileName="Assets\buttonTouchedPlatformer.cs" Line="121" Column="19" />
+      <File FileName="Assets\EndingTheGame.cs" Line="19" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

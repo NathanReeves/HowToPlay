@@ -118,7 +118,7 @@ public class buttonTouchedPlatformer : MonoBehaviour {
 			cubeIsIn = false;
 		}
 
-		if (!cubeIsIn || !playerIsIn) {
+		if (!cubeIsIn && !playerIsIn) {
 			cube.GetComponent<MeshRenderer> ().material = dfault;
 		}
 
