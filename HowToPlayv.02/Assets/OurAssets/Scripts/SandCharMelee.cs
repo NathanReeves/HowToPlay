@@ -6,11 +6,9 @@ public class SandCharMelee : MonoBehaviour
 {
     // Serialized fields
     [SerializeField]
-    private int damageAmount = 20;
+    private int damageAmount = 100;
     [SerializeField]
     private float attackCooldown = 0.5f;
-    [SerializeField]
-    private float attackRange = 3f;
 
     // Private fields
     private float timer;
@@ -34,7 +32,7 @@ public class SandCharMelee : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(enemyHealth);
+        Debug.Log("Hitable: " + hitable);
 
         // Increase timer since Update was called
         timer += Time.deltaTime;
@@ -45,7 +43,11 @@ public class SandCharMelee : MonoBehaviour
             // ... attack!
             Attack();
         }
-
+        if (Input.GetAxis("Fire3") != 0 && timer >= attackCooldown)
+        {
+            // ... attack!
+            Attack();
+        }
         /*
         // If timer has exceeded 
         if (timer >= shotCooldown * effectsDisplayTime)
@@ -59,20 +61,15 @@ public class SandCharMelee : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If colliding with an enemy hitbox...
-        if (other.CompareTag("Enemy"))
+        if (other.GetType() == typeof(BoxCollider) && other.CompareTag("Enemy"))
         {
             // ... set hitable to true
             hitable = true;
 
             // Also make note of enemy being hit (so we know who's health to decrease)
             enemyHealth = other.GetComponentInParent<SandEnemyHealth>();
-        }
 
-        // If player collides with head collider on enemy...
-        if (other.GetType() == typeof(SphereCollider))
-        {
-            // ... destroy this enemy
-            Destroy(other.gameObject);
+            //Debug.Log(enemyHealth.currentHealth);
         }
     }
 
@@ -86,7 +83,7 @@ public class SandCharMelee : MonoBehaviour
         }
     }
 
-    void Attack()
+    public void Attack()
     {
         // Reset timer
         timer = 0f;
@@ -101,8 +98,10 @@ public class SandCharMelee : MonoBehaviour
         // If enemy is hitable and has health...
         if (hitable && enemyHealth != null)
         {
+            //Debug.Log("Attacking");
+
             // ... attack it and subtract damageAmount from their health
-            enemyHealth.currentHealth -= damageAmount;
+            enemyHealth.TakeDamage(damageAmount);
         }
     }
 }

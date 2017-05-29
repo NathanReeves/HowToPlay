@@ -5,14 +5,14 @@ using UnityEngine;
 public class SandEnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    private float attackCooldown = 0.5f;
+    private float attackCooldown = 1f;
     [SerializeField]
-    private int attackDamage = 10;
+    private int attackDamage = 25;
 
     //private Animator anim;
     private GameObject player;
     private SandCharHealth charHealth;
-    //private SandEnemyHealth enemyHealth;
+    private SandEnemyHealth enemyHealth;
     private bool playerInAttackRange;
     private float attackTimer;
 
@@ -21,24 +21,24 @@ public class SandEnemyAttack : MonoBehaviour
         // Setup references
         player = GameObject.FindGameObjectWithTag("Player");
         charHealth = player.GetComponent<SandCharHealth>();
-        //enemyHealth = GetComponent<SandEnemyHealth>();
+        enemyHealth = GetComponent<SandEnemyHealth>();
         //anim = GetComponent<Animator>();
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         // If enemy is colliding with player...
-        if (other.gameObject == player)
+        if (collision.gameObject == player)
         {
             // ... player is in attack range
             playerInAttackRange = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
-        // If enemy is moving away from player...
-        if (other.gameObject == player)
+        // If enemy is no longer colliding with player...
+        if (collision.gameObject == player)
         {
             // ... player is no longer in attack range
             playerInAttackRange = false;

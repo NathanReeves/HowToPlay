@@ -50,16 +50,35 @@ public class SandEnemyMovePatrol : MonoBehaviour
         // If enemy still has health...
         if (enemyHealth.currentHealth > 0)
         {
-            // ... patrol back and forth between min and max position:
-            if (transform.position.z == patrolZBoundMin)
+            // If moving only in Z axis...
+            if (patrolXSize == 0)
             {
-                nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolZBoundMax));
+                // ... patrol back and forth between min and max position:
+                if (transform.position.z == patrolZBoundMin)
+                {
+                    nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolZBoundMax));
+                }
+                // If enemy has hit patrolBoundMax, move left again towards patrolBoundMin
+                else if (transform.position.z == patrolZBoundMax)
+                {
+                    nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolZBoundMin));
+                }
             }
-            // If enemy has hit patrolBoundMax, move left again towards patrolBoundMin
-            else if (transform.position.z == patrolZBoundMax)
+            // If moving only in X axis...
+            else if (patrolZSize == 0)
             {
-                nav.SetDestination(new Vector3(transform.position.x, transform.position.y, patrolZBoundMin));
+                // ... patrol back and forth between min and max position:
+                if (transform.position.x == patrolXBoundMin)
+                {
+                    nav.SetDestination(new Vector3(patrolXBoundMax, transform.position.y, transform.position.z));
+                }
+                // If enemy has hit patrolBoundMax, move left again towards patrolBoundMin
+                else if (transform.position.x == patrolXBoundMax)
+                {
+                    nav.SetDestination(new Vector3(patrolXBoundMin, transform.position.y, transform.position.z));
+                }
             }
+            
         }
         // Otherwise...
         else

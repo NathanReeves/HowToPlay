@@ -18,11 +18,16 @@ public class SandCharController : MonoBehaviour
     [SerializeField]
     private Camera firstCam;
 
+    private GameObject attackPoint;
     private int keyCount;
+    private int gunCount;
+    private bool melee;
     private Vector3 movement;
     private Vector3 lastLook;
+    private Vector3 Last;
     private Rigidbody playerRigidBody;
-    private int moveZone = 1;
+    public GameObject gun;
+    public int moveZone = 1;
     private bool isGrounded;
     bool turn;
     bool forward;
@@ -33,11 +38,15 @@ public class SandCharController : MonoBehaviour
 
     void Awake()
     {
+        attackPoint = GameObject.FindGameObjectWithTag("AttackPoint");
+        attackPoint.GetComponent<SandCharMelee>().enabled = true;
+        attackPoint.GetComponent<SandCharShooting>().enabled = false;
         keyCount = 0;
+        gunCount = 0;
         keys.text = "Keys: " + keyCount.ToString();
         floorMask = LayerMask.GetMask("Floor");
         playerRigidBody = GetComponent<Rigidbody>();
-
+        Physics.gravity = new Vector3(0, -25f, 0);
         platCam = platCam.GetComponent<Camera>();
         twinCam = twinCam.GetComponent<Camera>();
         thirdCam = thirdCam.GetComponent<Camera>();
@@ -55,11 +64,11 @@ public class SandCharController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("Player pos: " + this.transform.position);
 
         // Use platformer controls when in platformer zone
         if (moveZone == 1 || moveZone == 2)
         {
+           
             float moveHorizontal = Input.GetAxis("Horizontal");
             if (moveHorizontal < 0)
             {
@@ -86,8 +95,10 @@ public class SandCharController : MonoBehaviour
         // Use twin stick club controls when in twin stick club zone
         else if (moveZone == 3)
         {
+            
             //gameObject.transform.localScale = new Vector3(4,4,4);
-            moveSpeed = 30;
+            moveSpeed = 25;
+            jumpSpeed = 500;
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
             MoveTwinStickClub(moveHorizontal, moveVertical);
@@ -98,27 +109,29 @@ public class SandCharController : MonoBehaviour
                 if (forward)
                     turn = true;
                 forward = false;
-
+                
             }
             else
             {
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
+            if (Input.GetAxis("Fire3") != 0 && melee)
+            {
+                GetComponent<Animator>().SetTrigger("meleet");
+            }
+
 
         }
-        // Use twin stick shooting controls when in twin stick shoot zone
+        // Add shooting mechanics
         else if (moveZone == 4)
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
-
-            //twinCam.GetComponent<Camera>().transform.forward.y  
-            MoveTwinStickShoot(moveHorizontal, moveVertical);
-            TurnTwinStickShoot();
+            
         }
         // Use 3rd/1st person controls when in 3rd/1st person zone
         else if (moveZone == 5 | moveZone == 6)
         {
+            moveSpeed = 40;
+            jumpSpeed = 800;
             // Move player forward, back, left, right
             float moveForwardBack = Input.GetAxis("Vertical");
             float strafeLeftRight = Input.GetAxis("Horizontal");
@@ -135,6 +148,7 @@ public class SandCharController : MonoBehaviour
                 GetComponent<Animator>().SetBool("IsWalking", false);
             }
             Move3rd(strafeLeftRight, moveForwardBack);
+            Turn3rd(strafeLeftRight, moveForwardBack);
         }
 
         // Check for jumping
@@ -158,21 +172,27 @@ public class SandCharController : MonoBehaviour
 
     private void MovePlatformer(float horiz)
     {
-        Physics.gravity = new Vector3(0, -25f, 0);
+        
         // Set movement/rotation constraints
         playerRigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
 
         // Set movement according to input
-        movement.Set(0f, 0f, horiz);
+        movement.Set(0f, playerRigidBody.velocity.y, horiz*moveSpeed);
 
         // Normalize movement
-        movement = movement * moveSpeed * Time.deltaTime;
-
+        //movement = movement * moveSpeed * Time.deltaTime;
+        playerRigidBody.velocity = movement;
         // Move player
-        playerRigidBody.MovePosition(transform.position + movement);
+        //playerRigidBody.MovePosition(transform.position + movement);
     }
     private void TurnTwinStickClub()
     {
+        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        //Vector3 target = Input.GetAxis("Fire2")*Vector3.forward + Input.GetAxis("Fire1") * Vector3.right ;
+        //target = target.normalized * moveSpeed * Time.deltaTime;
+        //lastLook = target;
+        //playerRigidBody.transform.Rotate(Input.GetAxis("Fire1"), Input.GetAxis("Fire2"), 0);
+        //playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
         Vector3 cameraForward = twinCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
         cameraForward.y = 0f;
         cameraForward = cameraForward.normalized;
@@ -180,37 +200,31 @@ public class SandCharController : MonoBehaviour
         Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
 
         Vector3 target = Input.GetAxis("Fire2") * cameraRight + Input.GetAxis("Fire1") * cameraForward * -1;
+        if (target.x == 0 && target.z == 0)
+        {
+            if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+                target = Last;
+            else
+            {
+                target = Input.GetAxis("Horizontal") * cameraRight + Input.GetAxis("Vertical") * cameraForward;
+                Last = target;
+            }
+        }
+        else
+        {
+            
+            Last = target;
+        }
         //target = target.normalized * moveSpeed * Time.deltaTime;
-        //lastLook = target;
 
         playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
+        
     }
     private void MoveTwinStickClub(float horiz, float vert)
     {
-
-        Transform cameraTransform = twinCam.GetComponent<Camera>().transform;
-        // forward of the camera on the x-z plane
-        Vector3 cameraForward = twinCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
-        cameraForward.y = 0f;
-        cameraForward = cameraForward.normalized;
-
-        Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
-
-
-        // Set rotation constraints
-        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
-        // Set movement according to input
-        movement.Set(-vert, 0f, horiz);
-
-        // Normalize movement
-
-        var axis = transform.position;
-        Vector3 target = horiz * cameraRight + vert * cameraForward;
-        target = target.normalized * moveSpeed * Time.deltaTime;
-        lastLook = target;
         // Move player
-        playerRigidBody.MovePosition(transform.position + target);
+        //playerRigidBody.MovePosition(transform.position + target);
+        playerRigidBody.velocity = new Vector3(horiz*moveSpeed, playerRigidBody.velocity.y, vert*moveSpeed);
         //playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
     }
     private void Move3rd(float horiz, float vert)
@@ -244,33 +258,34 @@ public class SandCharController : MonoBehaviour
         playerRigidBody.MovePosition(transform.position + target);
 
     }
-    private void Turn3rd(float horiz, float vert)
+    private void Turn3rd(float horizontal, float vertical)
     {
 
-        Transform cameraTransform = thirdCam.GetComponent<Camera>().transform;
-        // forward of the camera on the x-z plane
-        Vector3 cameraForward = thirdCam.GetComponent<Camera>().transform.TransformDirection(Vector3.forward);
-        cameraForward.y = 0f;
-        cameraForward = cameraForward.normalized;
 
-        Vector3 cameraRight = new Vector3(cameraForward.z, 0.0f, -cameraForward.x);
+        // Get camera forward direction, without vertical component.
 
+        Vector3 forward = thirdCam.transform.forward;
 
-        // Set rotation constraints
-        playerRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        // Player is moving on ground, Y component of camera facing is not relevant.
+        forward.y = 0.0f;
+        forward = forward.normalized;
 
-        // Set movement according to input
-        movement.Set(-vert, 0f, horiz);
+        // Calculate target direction based on camera forward and direction key.
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 targetDirection;
+        targetDirection = forward * vertical + right * horizontal;
+        if (targetDirection.x == 0 && targetDirection.z == 0)
+        {
+            targetDirection = Last;
+        }
+        else
+        {
+            Last = targetDirection;
+        }
 
-        // Normalize movement
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        playerRigidBody.MoveRotation(targetRotation);
 
-        var axis = transform.position;
-        Vector3 target = horiz * cameraRight + vert * cameraForward;
-        target = target.normalized * moveSpeed * Time.deltaTime;
-        lastLook = target;
-        // Move player
-        playerRigidBody.MovePosition(transform.position + target);
-        //playerRigidBody.MoveRotation(Quaternion.LookRotation(target));
     }
     private void MoveTwinStickShoot(float horiz, float vert)
     {
@@ -338,12 +353,9 @@ public class SandCharController : MonoBehaviour
         {
             // Switch to twin stick controls (only weapon swinging)
             moveZone = 3;
-
             // Show sword and enable melee attack
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(3).gameObject.SetActive(true);
+            //this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            //this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
             // Switch to twin stick camera
             platCam.enabled = false;
@@ -355,23 +367,22 @@ public class SandCharController : MonoBehaviour
         if (other.gameObject.CompareTag("EnterTwinStickShoot"))
         {
             // Switch to twin stick shooter controls (add shooting)
-            moveZone = 4;
+            //moveZone = 4;
+            melee = false;
+            attackPoint.GetComponent<SandCharMelee>().enabled = false;
+            attackPoint.GetComponent<SandCharShooting>().enabled = true;
 
             // Hide melee weapon and disable melee attack
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
-            this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
-            this.gameObject.transform.GetChild(3).gameObject.SetActive(false);
 
             // Show gun and enable shooting attack
-            this.gameObject.transform.GetChild(4).gameObject.SetActive(true);
-            this.gameObject.transform.GetChild(5).gameObject.SetActive(true);
+            //this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+
         }
         if (other.gameObject.CompareTag("Enter3rdPerson"))
         {
             // Switch to 3rd person / 1st person controls
             moveZone = 5;
-
+            GetComponent<Animator>().SetBool("hasGun", false);
             // Switch to 3rd person camera
             platCam.enabled = false;
             twinCam.enabled = false;
@@ -392,6 +403,17 @@ public class SandCharController : MonoBehaviour
             keyCount++;
             keys.text = "Keys: " + keyCount.ToString();
         }
+        if (other.gameObject.CompareTag("Gun"))
+        {
+            gunCount++;
+        }
+        if (other.gameObject.CompareTag("Gun"))
+        {
+            gun.SetActive(true);
+            melee = true;
+            GetComponent<Animator>().SetBool("hasGun", true);
+            other.gameObject.SetActive(false);
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -402,7 +424,7 @@ public class SandCharController : MonoBehaviour
                     isGrounded = true;                  
             GetComponent<Animator>().SetBool("Grounded", true);
             GetComponent<Animator>().SetBool("Jump", false);
-            playerRigidBody.transform.parent = collision.transform;
+            //playerRigidBody.transform.position = collision.transform.position;
         }
        
             if (collision.gameObject.CompareTag("MovingGround"))
@@ -419,7 +441,10 @@ public class SandCharController : MonoBehaviour
             collision.gameObject.SetActive(false);
             keyCount--;
             keys.text = "Keys: " + keyCount.ToString();
-
+        }
+        if (collision.gameObject.CompareTag("GunDoor") && gunCount > 0)
+        {
+            collision.gameObject.SetActive(false);
         }
     }
 

@@ -17,7 +17,7 @@ public class SandCharShooting : MonoBehaviour
     Ray shotFired;
     RaycastHit shotHit;
     int shootableMask;
-    //ParticleSystem gunParticles;
+    ParticleSystem gunParticles;
     LineRenderer shotLine;
     //AudioSource gunAudio;
     //Light gunLight;
@@ -30,7 +30,7 @@ public class SandCharShooting : MonoBehaviour
         shootableMask = LayerMask.GetMask("Shootable");
 
         // Setup references
-        //gunParticles = GetComponent<ParticleSystem>();
+        gunParticles = GetComponent<ParticleSystem>();
         shotLine = GetComponent<LineRenderer>();
         //gunAudio = GetComponent<AudioSource>();
         //gunLight = GetComponent<Light>();
@@ -48,7 +48,10 @@ public class SandCharShooting : MonoBehaviour
             // ... shoot!
             Shoot();
         }
-
+        if(Input.GetAxis("Fire3") != 0 && timer >= shotCooldown)
+        {
+            Shoot();
+        }
         // If timer is exceeded...
         if (timer >= shotCooldown * effectsDisplayTime)
         {
@@ -75,8 +78,8 @@ public class SandCharShooting : MonoBehaviour
         //gunLight.enabled = true;
 
         // Start/reset gun particle effects
-        //gunParticles.Stop();
-        //gunParticles.Play();
+        gunParticles.Stop();
+        gunParticles.Play();
 
         // Set first point of visible shot line at gun barrel
         shotLine.enabled = true;
@@ -95,7 +98,7 @@ public class SandCharShooting : MonoBehaviour
             // If hit object does have EnemyHelth, it takes damage
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damageAmount, shotHit.point);
+                enemyHealth.TakeDamage(damageAmount);
             }
 
             // Set end of line renderer at hit object

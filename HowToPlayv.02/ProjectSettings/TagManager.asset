@@ -22,6 +22,15 @@ TagManager:
   - Checkpoint
   - Start
   - Wall
+  - JustTextPanel
+  - TextAndImage
+  - ControllerLeftAnalogImage
+  - Melee
+  - Gun
+  - GunDoor
+  - AttackPoint
+  - Button1
+  - Button2
   layers:
   - Default
   - TransparentFX
